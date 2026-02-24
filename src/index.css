@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-textDark font-sans antialiased selection:bg-accent selection:text-white;
+  }
+}
+
+@layer utilities {
+  .clip-path-circle {
+    clip-path: circle(50% at 50% 50%);
+  }
+}
+
+/* Global Noise Overlay Texture */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+}
+
+/* Magnetic Button Base Logic */
+.magnetic-btn {
+  @apply relative overflow-hidden inline-flex items-center justify-center transition-transform duration-500 rounded-full font-heading font-medium;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.magnetic-btn:hover {
+  transform: scale(1.03);
+}
+
+.link-lift {
+  @apply inline-block transition-transform duration-300;
+}
+.link-lift:hover {
+  transform: translateY(-1px);
+}
