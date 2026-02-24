@@ -7,7 +7,7 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "/Users/philippudaloy/Desktop/Anti-Gravity Gemini Website Builder/dist"
+publish = "/Users/philippudaloy/Desktop/NovaReach_Website/dist"
 publishOrigin = "ui"
 commandOrigin = "ui"
 command = "npm run build"

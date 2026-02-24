@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Icon } from '@iconify/react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import Cal, { getCalApi } from "@calcom/embed-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,20 +17,22 @@ function cn(...inputs) {
 // GLOBAL UI COMPONENTS
 // ----------------------------------------------------------------------------
 
-const MagneticButton = ({ children, className, variant = 'primary', ...props }) => {
-    const baseClasses = "magnetic-btn px-8 py-4 text-base tracking-wide transition-colors group";
+const MagneticButton = ({ children, className, variant = 'primary', href, ...props }) => {
+    const baseClasses = "magnetic-btn px-8 py-4 text-base tracking-wide transition-colors group inline-flex items-center justify-center cursor-pointer";
     const variants = {
         primary: "bg-primary text-background hover:bg-primary/90",
         accent: "bg-accent text-white hover:bg-accent/90",
         outline: "border border-textDark/20 hover:border-textDark text-textDark bg-transparent"
     };
 
+    const Element = href ? 'a' : 'button';
+
     return (
-        <button className={cn(baseClasses, variants[variant], className)} {...props}>
+        <Element href={href} className={cn(baseClasses, variants[variant], className)} {...props}>
             <span className="relative z-10 flex items-center gap-2">
                 {children}
             </span>
-        </button>
+        </Element>
     );
 };
 
@@ -75,7 +78,7 @@ const Navbar = () => {
                 <a href="#features" className="link-lift hover:text-accent transition-colors">Features</a>
                 <a href="#industries" className="link-lift hover:text-accent transition-colors">Industries</a>
             </div>
-            <MagneticButton variant={isScrolled ? 'accent' : 'primary'} className="hidden sm:flex px-6 py-2.5 text-sm">
+            <MagneticButton href="#booking" variant={isScrolled ? 'accent' : 'primary'} className="hidden sm:flex px-6 py-2.5 text-sm">
                 Try Free Demo
             </MagneticButton>
         </nav>
@@ -145,10 +148,10 @@ const Hero = () => {
                         Your clients want fast answers. NovaReach responds instantly and turns every call or message into a booked appointment — 24/7.
                     </p>
                     <div className="hero-elem flex flex-wrap gap-4">
-                        <MagneticButton variant="accent" className="px-8 py-3.5 text-background font-bold rounded-full">
+                        <MagneticButton href="#booking" variant="accent" className="px-8 py-3.5 text-background font-bold rounded-full">
                             Try Free Demo <Icon icon="pixelarticons:arrow-right" className="w-5 h-5 ml-1 inline" />
                         </MagneticButton>
-                        <MagneticButton variant="outline" className="px-8 py-3.5 text-white border-white/30 hover:bg-white/10 font-bold rounded-full">
+                        <MagneticButton href="#booking" variant="outline" className="px-8 py-3.5 text-white border-white/30 hover:bg-white/10 font-bold rounded-full">
                             Talk to an Expert
                         </MagneticButton>
                     </div>
@@ -764,7 +767,7 @@ const Industries = () => {
                         <p className="font-sans text-xl text-background/80 mb-12 font-light">
                             Reserve your free demo today and see how effortless growth becomes when your business runs on autopilot.
                         </p>
-                        <MagneticButton variant="accent" className="text-lg px-12 py-5 shadow-2xl shadow-accent/20">
+                        <MagneticButton href="#booking" variant="accent" className="text-lg px-12 py-5 shadow-2xl shadow-accent/20">
                             Book Live Demo
                         </MagneticButton>
                     </div>
@@ -1023,6 +1026,35 @@ const FAQ = () => {
 };
 
 // ----------------------------------------------------------------------------
+// J. BOOKING SECTION
+// ----------------------------------------------------------------------------
+const Booking = () => {
+    return (
+        <section id="booking" className="py-24 bg-background relative z-10 font-sans border-t border-primary/10">
+            <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
+                <div className="mb-12">
+                    <h2 className="text-4xl md:text-5xl font-heading font-medium text-textDark mb-5">
+                        Ready to automate your growth?
+                    </h2>
+                    <p className="text-textDark/60 text-lg max-w-2xl mx-auto">
+                        Book a free 30-minute onboarding call below. We'll analyze your current workflow and show you exactly how NovaReach integrates seamlessly into your business.
+                    </p>
+                </div>
+
+                {/* Embedded Cal.com */}
+                <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-textDark/10 relative w-full" style={{ height: '700px' }}>
+                    <Cal
+                        calLink="philipp-udaloy/30min"
+                        style={{ width: "100%", height: "100%", overflow: "scroll" }}
+                        config={{ layout: 'month_view' }}
+                    />
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// ----------------------------------------------------------------------------
 // MAIN APP COMPONENT
 // ----------------------------------------------------------------------------
 
@@ -1038,6 +1070,7 @@ function App() {
             <Testimonials />
             <Industries />
             <FAQ />
+            <Booking />
             <Footer />
         </div>
     );
