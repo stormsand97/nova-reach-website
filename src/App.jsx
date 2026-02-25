@@ -1042,11 +1042,11 @@ const Booking = () => {
                 </div>
 
                 {/* Embedded Cal.com */}
-                <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-textDark/10 relative w-full" style={{ height: '700px' }}>
+                <div className="w-full relative bg-[#111111] rounded-3xl overflow-hidden min-h-[600px] p-2 sm:p-4">
                     <Cal
-                        calLink="philipp-udaloy/30min"
-                        style={{ width: "100%", height: "100%", overflow: "scroll" }}
-                        config={{ layout: 'month_view' }}
+                        calLink="philipp-udaloy-novareach/30min"
+                        style={{ width: "100%", height: "100%", overflow: "hidden" }}
+                        config={{ layout: 'month_view', theme: 'dark' }}
                     />
                 </div>
             </div>
@@ -1069,8 +1069,8 @@ function App() {
             <HowItWorks />
             <Testimonials />
             <Industries />
-            <FAQ />
             <Booking />
+            <FAQ />
             <Footer />
         </div>
     );
