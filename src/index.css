@@ -14,6 +14,13 @@
   }
 }
 
+#root {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  max-width: 100vw !important;
+  overflow-x: hidden;
+}
+
 /* Global Noise Overlay Texture */
 .noise-overlay {
   position: fixed;

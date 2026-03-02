@@ -5,6 +5,8 @@ import { Icon } from '@iconify/react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import Cal, { getCalApi } from "@calcom/embed-react";
+import avatarsImg from './assets/avatars.jpg';
+import topomapImg from './assets/topographical-map.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,7 +121,7 @@ const Hero = () => {
             {/* Black Box on the inside */}
             <div className="relative z-10 w-full max-w-6xl mx-auto rounded-[3rem] bg-[#0A0A0A]/95 flex flex-col lg:flex-row items-center gap-12 lg:gap-8 overflow-hidden border border-white/10 p-10 md:p-16 shadow-2xl mt-8">
                 {/* Subtle topological map over the black box */}
-                <div className="absolute inset-0 z-0 opacity-5" style={{ backgroundImage: 'url(/topographical-map.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+                <div className="absolute inset-0 z-0 opacity-5" style={{ backgroundImage: `url(${topomapImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
 
                 {/* Left Column - Original Copy */}
                 <div className="flex-1 flex flex-col justify-center relative z-10">
@@ -237,7 +239,7 @@ const PixelAgent = ({ name, role, description, bgX, bgY, delay, theme = "light" 
                 <div
                     className="w-full h-full transform transition-transform duration-300 group-hover:scale-110"
                     style={{
-                        backgroundImage: 'url(/avatars.jpg)',
+                        backgroundImage: `url(${avatarsImg})`,
                         backgroundSize: '400% 400%',
                         backgroundPosition: `${bgX}% ${bgY}%`,
                         imageRendering: 'pixelated'
@@ -257,7 +259,7 @@ const Features = () => {
     return (
         <section id="features" className="py-24 md:py-32 bg-background relative z-10 overflow-hidden">
             {/* Section-wide Topological Map Background Overlay */}
-            <div className="absolute inset-0 z-0 opacity-10 mix-blend-multiply pointer-events-none" style={{ backgroundImage: 'url(/topographical-map.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+            <div className="absolute inset-0 z-0 opacity-10 mix-blend-multiply pointer-events-none" style={{ backgroundImage: `url(${topomapImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
 
             <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                 <div className="text-center mb-20 max-w-3xl mx-auto">
@@ -1059,6 +1061,21 @@ const Booking = () => {
 // ----------------------------------------------------------------------------
 
 function App() {
+    useEffect(() => {
+        // Strip padding/margin from GoHighLevel wrappers
+        let parent = document.getElementById('root')?.parentElement;
+        while (parent && parent.tagName !== 'BODY') {
+            parent.style.setProperty('padding', '0', 'important');
+            parent.style.setProperty('margin', '0', 'important');
+            parent.style.setProperty('max-width', '100%', 'important');
+            parent.style.setProperty('width', '100vw', 'important');
+            parent.style.setProperty('overflow-x', 'visible', 'important');
+            parent = parent.parentElement;
+        }
+        document.body.style.setProperty('padding', '0', 'important');
+        document.body.style.setProperty('margin', '0', 'important');
+    }, []);
+
     return (
         <div className="relative bg-background min-h-screen selection:bg-accent selection:text-white">
             <Navbar />
