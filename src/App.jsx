@@ -1067,7 +1067,6 @@ function App() {
             <RevenueCalculator />
             <InstantBookingInfo />
             <HowItWorks />
-            <Testimonials />
             <Industries />
             <Booking />
             <FAQ />
