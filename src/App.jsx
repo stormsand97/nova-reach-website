@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Icon } from '@iconify/react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import Cal, { getCalApi } from "@calcom/embed-react";
 import avatarsImg from './assets/avatars.jpg';
 import topomapImg from './assets/topographical-map.svg';
 
@@ -1031,6 +1030,22 @@ const FAQ = () => {
 // J. BOOKING SECTION
 // ----------------------------------------------------------------------------
 const Booking = () => {
+    useEffect(() => {
+        // Load the GHL embed script dynamically when the component mounts
+        const script = document.createElement('script');
+        script.src = "https://link.msgsndr.com/js/form_embed.js";
+        script.type = "text/javascript";
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            // Cleanup on unmount
+            if (document.body.contains(script)) {
+                document.body.removeChild(script);
+            }
+        };
+    }, []);
+
     return (
         <section id="booking" className="py-24 bg-background relative z-10 font-sans border-t border-primary/10">
             <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
@@ -1043,12 +1058,13 @@ const Booking = () => {
                     </p>
                 </div>
 
-                {/* Embedded Cal.com */}
-                <div className="w-full relative bg-[#111111] rounded-3xl overflow-hidden min-h-[600px] p-2 sm:p-4">
-                    <Cal
-                        calLink="philipp-udaloy-novareach/30min"
-                        style={{ width: "100%", height: "100%", overflow: "hidden" }}
-                        config={{ layout: 'month_view', theme: 'dark' }}
+                {/* Embedded GoHighLevel Calendar */}
+                <div className="w-full relative bg-transparent rounded-3xl overflow-hidden min-h-[600px]">
+                    <iframe
+                        src="https://api.leadconnectorhq.com/widget/booking/hTBn9WId3s7XEsuZWwOI"
+                        style={{ width: "100%", border: "none", overflow: "hidden", minHeight: "650px" }}
+                        scrolling="no"
+                        id="hTBn9WId3s7XEsuZWwOI_1773277844366"
                     />
                 </div>
             </div>
