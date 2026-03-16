@@ -1033,7 +1033,7 @@ const Booking = () => {
     useEffect(() => {
         // Load the GHL embed script dynamically when the component mounts
         const script = document.createElement('script');
-        script.src = "https://link.msgsndr.com/js/form_embed.js";
+        script.src = "https://link.getnovareach.com/js/form_embed.js";
         script.type = "text/javascript";
         script.async = true;
         document.body.appendChild(script);
@@ -1061,10 +1061,10 @@ const Booking = () => {
                 {/* Embedded GoHighLevel Calendar */}
                 <div className="w-full relative bg-transparent rounded-3xl overflow-hidden min-h-[600px]">
                     <iframe
-                        src="https://api.leadconnectorhq.com/widget/booking/hTBn9WId3s7XEsuZWwOI"
+                        src="https://link.getnovareach.com/widget/booking/fWwCpZQn3z4lnOSsAe2h"
                         style={{ width: "100%", border: "none", overflow: "hidden", minHeight: "650px" }}
                         scrolling="no"
-                        id="hTBn9WId3s7XEsuZWwOI_1773277844366"
+                        id="ILBQfF9I1a8yvM3JJVFm_1773703265867"
                     />
                 </div>
             </div>
