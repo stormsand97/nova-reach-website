@@ -49,3 +49,20 @@
 .link-lift:hover {
   transform: translateY(-1px);
 }
+
+/* Form Embed Popup Overrides */
+.ep-wrapper,
+.ep-popup,
+.ep-iFrameContainer {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.ep-close-icon {
+  opacity: 0.35 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.ep-close-icon:hover {
+  opacity: 0.7 !important;
+}
