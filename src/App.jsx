@@ -918,8 +918,8 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans text-background/40">
                 <p>© 2026 NovaReach. All Rights Reserved.</p>
                 <div className="flex gap-6">
-                    <a href="#" className="hover:text-background transition-colors">Terms & Conditions</a>
-                    <a href="#" className="hover:text-background transition-colors">Privacy Policy</a>
+                    <a href="#/terms" className="hover:text-background transition-colors">Terms & Conditions</a>
+                    <a href="#/privacy" className="hover:text-background transition-colors">Privacy Policy</a>
                 </div>
             </div>
         </footer>
@@ -1076,6 +1076,239 @@ const Booking = () => {
 // MAIN APP COMPONENT
 // ----------------------------------------------------------------------------
 
+// ----------------------------------------------------------------------------
+// LEGAL PAGES
+// ----------------------------------------------------------------------------
+
+const LegalPage = ({ children }) => {
+    useEffect(() => { window.scrollTo(0, 0); }, []);
+    return (
+        <div className="bg-background min-h-screen selection:bg-accent selection:text-white">
+            <Navbar />
+            <main className="max-w-3xl mx-auto px-6 pt-36 pb-24">
+                <a href="#" className="inline-flex items-center gap-2 font-sans text-sm text-textDark/50 hover:text-accent transition-colors mb-10">
+                    ← Back to Home
+                </a>
+                {children}
+            </main>
+            <Footer />
+        </div>
+    );
+};
+
+const SectionTitle = ({ children }) => (
+    <h2 className="font-heading font-bold text-xl text-primary mt-10 mb-3">{children}</h2>
+);
+
+const PrivacyPolicyPage = () => (
+    <LegalPage>
+        <p className="font-mono text-xs text-accent uppercase tracking-widest mb-3">Legal</p>
+        <h1 className="font-heading font-bold text-4xl text-textDark mb-2">Privacy Policy</h1>
+        <p className="font-sans text-sm text-textDark/40 mb-10">Effective date: March 18, 2026 &nbsp;·&nbsp; Last updated: March 18, 2026</p>
+
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            <strong>Udaloy Trading Inc.</strong> (operating as <strong>NovaReach</strong>, "we," "us," or "our") is committed to protecting your personal information. This Privacy Policy describes how we collect, use, and disclose information when you visit <strong>getnovareach.com</strong> (the "Site") or engage our services.
+        </p>
+
+        <SectionTitle>1. Who We Are</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            Udaloy Trading Inc. (dba NovaReach)<br />
+            530 Rue Saint-Hubert, Unit 1517<br />
+            Montréal, QC H2Y 0B9, Canada<br /><br />
+            Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
+            Phone: +1 782 377 5142
+        </p>
+
+        <SectionTitle>2. Information We Collect</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3"><strong>a) Information you provide directly</strong></p>
+        <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1 mb-4">
+            <li><strong>Name</strong> — when you submit our contact or inquiry form</li>
+            <li><strong>Email address</strong> — when you submit our contact or inquiry form</li>
+            <li><strong>Phone number</strong> — when you submit our form or opt in to SMS communications</li>
+        </ul>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3"><strong>b) Payment information</strong></p>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-4">
+            Payments are processed through <strong>GoHighLevel</strong> and/or <strong>Stripe</strong>. We do not store your full credit card details on our servers. These processors handle all payment data securely under their own privacy policies.
+        </p>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3"><strong>c) Usage and analytics data</strong></p>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            We use <strong>Vercel Analytics</strong> and <strong>Vercel Speed Insights</strong> to collect anonymised data about Site usage (pages visited, referral sources, device/browser type). This data does not personally identify you.
+        </p>
+
+        <SectionTitle>3. How We Use Your Information</SectionTitle>
+        <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1">
+            <li>Respond to inquiries and fulfil service requests</li>
+            <li>Send SMS and email communications related to appointment booking and outreach (where you have opted in or we have a legitimate business reason)</li>
+            <li>Process payments for services rendered</li>
+            <li>Improve our Site and services through aggregated analytics</li>
+            <li>Comply with applicable legal obligations</li>
+        </ul>
+
+        <SectionTitle>4. SMS Communications</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            By providing your phone number and submitting our form, you consent to receive SMS text messages from NovaReach regarding appointment scheduling, follow-up communications, and service information. Message and data rates may apply. You may opt out at any time by replying <strong>STOP</strong> to any message we send.
+        </p>
+
+        <SectionTitle>5. Disclosure of Your Information</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3">
+            We do <strong>not</strong> sell, rent, or trade your personal information to third parties.
+        </p>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            We may share your information only with:
+        </p>
+        <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1 mt-2">
+            <li><strong>Service providers</strong> who assist us in operating our business (e.g., Stripe, GoHighLevel for payment processing and CRM) — these providers are contractually bound to handle your information confidentially and only for specified purposes</li>
+            <li><strong>Legal authorities</strong> if required by law, regulation, or valid court order</li>
+        </ul>
+
+        <SectionTitle>6. Data Retention</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            We retain your personal information for as long as necessary to fulfil the purposes outlined in this Policy, maintain our business records, and comply with legal obligations. Payment records are retained as required by applicable law.
+        </p>
+
+        <SectionTitle>7. Your Privacy Rights (PIPEDA)</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3">
+            As a Canadian resident, you have rights under the <strong>Personal Information Protection and Electronic Documents Act (PIPEDA)</strong>, including the right to:
+        </p>
+        <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1">
+            <li>Access the personal information we hold about you</li>
+            <li>Request correction of inaccurate or incomplete information</li>
+            <li>Withdraw consent to our use of your personal information (subject to legal or contractual restrictions)</li>
+        </ul>
+        <p className="font-sans text-textDark/80 leading-relaxed mt-3">
+            To exercise these rights, contact us at <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a>.
+        </p>
+
+        <SectionTitle>8. Analytics &amp; Cookies</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            Our Site does not use advertising or tracking cookies. Vercel Analytics uses a privacy-preserving approach that does not rely on cookies or persistent fingerprinting.
+        </p>
+
+        <SectionTitle>9. Third-Party Links</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            Our Site may contain links to third-party websites. We are not responsible for the privacy practices of those websites and encourage you to review their respective privacy policies.
+        </p>
+
+        <SectionTitle>10. Security</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            We take reasonable administrative and technical measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction.
+        </p>
+
+        <SectionTitle>11. Changes to This Policy</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            We may update this Privacy Policy from time to time. The updated policy will be posted on our Site with a revised effective date. We encourage you to review it periodically.
+        </p>
+
+        <SectionTitle>12. Contact Us</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            Udaloy Trading Inc. (dba NovaReach)<br />
+            530 Rue Saint-Hubert, Unit 1517<br />
+            Montréal, QC H2Y 0B9, Canada<br /><br />
+            Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
+            Phone: +1 782 377 5142
+        </p>
+    </LegalPage>
+);
+
+const TermsPage = () => (
+    <LegalPage>
+        <p className="font-mono text-xs text-accent uppercase tracking-widest mb-3">Legal</p>
+        <h1 className="font-heading font-bold text-4xl text-textDark mb-2">Terms &amp; Conditions</h1>
+        <p className="font-sans text-sm text-textDark/40 mb-10">Effective date: March 18, 2026</p>
+
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            These Terms and Conditions ("Terms") govern your access to and use of the NovaReach website (<strong>getnovareach.com</strong>) and any services provided by <strong>Udaloy Trading Inc.</strong> (operating as <strong>NovaReach</strong>, "we," "us," "our"). By accessing our Site or engaging our Services, you agree to be bound by these Terms.
+        </p>
+
+        <SectionTitle>1. About Us</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            Udaloy Trading Inc. (dba NovaReach)<br />
+            530 Rue Saint-Hubert, Unit 1517<br />
+            Montréal, QC H2Y 0B9, Canada<br /><br />
+            Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a>
+        </p>
+
+        <SectionTitle>2. Services</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            NovaReach provides AI-powered lead outreach, follow-up automation, and appointment booking services (the "Services"). The specific scope, pricing, and deliverables for any engagement will be set out in a separate service agreement or written proposal.
+        </p>
+
+        <SectionTitle>3. Payment Terms</SectionTitle>
+        <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1">
+            <li>Payments are processed through <strong>GoHighLevel</strong> and/or <strong>Stripe</strong></li>
+            <li>All fees are as agreed in your service agreement or invoice</li>
+            <li>Payments are due by the date specified in your invoice</li>
+            <li>All amounts are in Canadian dollars (CAD) unless otherwise stated in writing</li>
+            <li>Fees are non-refundable unless otherwise agreed in writing prior to payment</li>
+        </ul>
+
+        <SectionTitle>4. No Guarantee of Results</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            We make no representations or warranties that the Services will generate a specific number of leads, appointments, or revenue. Outcomes depend on many factors outside our control, including market conditions, your industry, competition, and the quality of your offer.
+        </p>
+
+        <SectionTitle>5. Intellectual Property</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            All content on this Site — including text, graphics, logos, software, and branding — is the property of Udaloy Trading Inc. and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content without our prior written consent.
+        </p>
+
+        <SectionTitle>6. Acceptable Use</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-2">You agree not to:</p>
+        <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1">
+            <li>Use our Site or Services for any unlawful purpose</li>
+            <li>Attempt to gain unauthorized access to our systems or data</li>
+            <li>Interfere with or disrupt the integrity or performance of our Services</li>
+            <li>Engage in any conduct that could harm or damage our reputation</li>
+        </ul>
+
+        <SectionTitle>7. Limitation of Liability</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3">
+            To the fullest extent permitted by applicable law, Udaloy Trading Inc. and its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including loss of profits, revenue, data, or goodwill — arising out of or in connection with your use of the Site or Services, even if we have been advised of the possibility of such damages.
+        </p>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            Our total aggregate liability to you for any claim arising out of or relating to these Terms or the Services shall not exceed the total fees paid by you to us in the three (3) months immediately preceding the event giving rise to the claim.
+        </p>
+
+        <SectionTitle>8. Indemnification</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            You agree to indemnify, defend, and hold harmless Udaloy Trading Inc. and its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, costs, and expenses (including reasonable legal fees) arising out of or in any way connected with your use of the Services or your breach of these Terms.
+        </p>
+
+        <SectionTitle>9. Governing Law &amp; Jurisdiction</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            These Terms are governed by and construed in accordance with the laws of the Province of <strong>Prince Edward Island</strong> and the federal laws of <strong>Canada</strong> applicable therein. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of Prince Edward Island, Canada.
+        </p>
+
+        <SectionTitle>10. Changes to These Terms</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            We reserve the right to modify these Terms at any time. The updated Terms will be posted on this page with a revised effective date. Your continued use of the Site or Services following any changes constitutes your acceptance of the revised Terms.
+        </p>
+
+        <SectionTitle>11. Severability</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            If any provision of these Terms is held to be invalid or unenforceable, that provision shall be modified to the minimum extent necessary, and the remaining provisions shall continue in full force and effect.
+        </p>
+
+        <SectionTitle>12. Entire Agreement</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            These Terms, together with any service agreement or written proposal provided to you, constitute the entire agreement between you and Udaloy Trading Inc. with respect to their subject matter and supersede all prior agreements and understandings.
+        </p>
+
+        <SectionTitle>13. Contact</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed">
+            Udaloy Trading Inc. (dba NovaReach)<br />
+            530 Rue Saint-Hubert, Unit 1517<br />
+            Montréal, QC H2Y 0B9, Canada<br /><br />
+            Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
+            Phone: +1 782 377 5142
+        </p>
+    </LegalPage>
+);
+
+// ----------------------------------------------------------------------------
+// MAIN PAGE
+// ----------------------------------------------------------------------------
+
 function App() {
     useEffect(() => {
         // Strip padding/margin from GoHighLevel wrappers
@@ -1125,4 +1358,17 @@ function App() {
     );
 }
 
-export default App;
+function Root() {
+    const [hash, setHash] = useState(window.location.hash);
+    useEffect(() => {
+        const handler = () => setHash(window.location.hash);
+        window.addEventListener('hashchange', handler);
+        return () => window.removeEventListener('hashchange', handler);
+    }, []);
+
+    if (hash === '#/privacy') return <PrivacyPolicyPage />;
+    if (hash === '#/terms') return <TermsPage />;
+    return <App />;
+}
+
+export default Root;
