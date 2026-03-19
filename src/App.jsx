@@ -1030,22 +1030,6 @@ const FAQ = () => {
 // J. BOOKING SECTION
 // ----------------------------------------------------------------------------
 const Booking = () => {
-    useEffect(() => {
-        // Load the GHL embed script dynamically when the component mounts
-        const script = document.createElement('script');
-        script.src = "https://link.getnovareach.com/js/embed.js";
-        script.type = "text/javascript";
-        script.async = true;
-        document.body.appendChild(script);
-
-        return () => {
-            // Cleanup on unmount
-            if (document.body.contains(script)) {
-                document.body.removeChild(script);
-            }
-        };
-    }, []);
-
     return (
         <section id="booking" className="py-24 bg-background relative z-10 font-sans border-t border-primary/10">
             <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
