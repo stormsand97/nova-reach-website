@@ -881,69 +881,46 @@ const Testimonials = () => {
 
 const Footer = () => {
     return (
-        <footer className="bg-textDark rounded-t-[4rem] px-6 md:px-12 mt-20 relative z-10 overflow-hidden">
-
-            {/* Top: CTA + Form */}
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 pt-24 pb-16 border-b border-white/10">
-                {/* Left: CTA */}
-                <div className="flex flex-col justify-start pt-2">
-                    <div className="flex items-center gap-2 mb-8">
-                        <NovaLogo className="w-5 h-5 text-accent" />
-                        <span className="font-mono text-xs text-accent uppercase tracking-widest">NovaReach</span>
+        <footer className="bg-textDark pt-24 pb-8 rounded-t-[4rem] px-6 md:px-12 mt-20 relative z-10">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 border-b border-white/10 pb-16">
+                <div className="col-span-1 md:col-span-2">
+                    <div className="flex items-center gap-2 mb-4">
+                        <NovaLogo className="w-8 h-8 text-accent" />
+                        <h3 className="font-heading font-bold text-2xl text-background">NovaReach</h3>
                     </div>
-                    <h2 className="font-heading font-bold text-5xl md:text-6xl text-background leading-tight mb-6">
-                        Book Your<br />Free Demo<br />Today.
-                    </h2>
-                    <p className="font-sans text-background/50 leading-relaxed max-w-sm font-light">
-                        See exactly how many appointments you're leaving on the table — and how we fix it in under 48 hours.
+                    <p className="font-sans text-background/60 max-w-sm mb-8 leading-relaxed font-light">
+                        Growth on autopilot with AI. Turn every call and message into a booked appointment seamlessly.
                     </p>
+                    <div className="inline-flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
+                        <span className="font-mono text-xs text-background/80 uppercase tracking-widest">System Operational</span>
+                    </div>
                 </div>
 
-                {/* Right: inline form */}
                 <div>
-                    <iframe
-                        src="https://link.getnovareach.com/widget/form/fvc0iNhRX6I3IWeRiDqz"
-                        style={{ width: "100%", height: "560px", border: "none", borderRadius: "16px" }}
-                        id="inline-fvc0iNhRX6I3IWeRiDqz"
-                        data-layout="{'id':'INLINE'}"
-                        data-form-id="fvc0iNhRX6I3IWeRiDqz"
-                        title="Contact Form"
-                    />
-                </div>
-            </div>
-
-            {/* Middle: nav + contact + status */}
-            <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-8 py-12 border-b border-white/10">
-                <div>
-                    <h4 className="font-sans font-bold text-background/40 mb-3 text-xs tracking-wider uppercase">Platform</h4>
-                    <ul className="space-y-2 font-sans text-background/60 text-sm">
+                    <h4 className="font-sans font-bold text-background mb-4 text-sm tracking-wider uppercase opacity-50">Platform</h4>
+                    <ul className="space-y-3 font-sans text-background/70 text-sm">
                         <li><a href="#how" className="hover:text-accent transition-colors">How it Works</a></li>
                         <li><a href="#features" className="hover:text-accent transition-colors">Features</a></li>
                         <li><a href="#industries" className="hover:text-accent transition-colors">Industries</a></li>
                     </ul>
                 </div>
+
                 <div>
-                    <h4 className="font-sans font-bold text-background/40 mb-3 text-xs tracking-wider uppercase">Contact</h4>
-                    <ul className="space-y-2 font-sans text-background/60 text-sm">
+                    <h4 className="font-sans font-bold text-background mb-4 text-sm tracking-wider uppercase opacity-50">Contact</h4>
+                    <ul className="space-y-3 font-sans text-background/70 text-sm">
                         <li>philipp@getnovareach.com</li>
                         <li>+1 782 377 5142</li>
                         <li className="leading-relaxed">530 Rue Saint-Hubert, Unit 1517<br />Montréal, QC H2Y 0B9, Canada</li>
                     </ul>
                 </div>
-                <div className="flex items-end col-span-2 md:col-span-1">
-                    <div className="inline-flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                        <span className="font-mono text-xs text-background/60 uppercase tracking-widest">System Operational</span>
-                    </div>
-                </div>
             </div>
 
-            {/* Copyright bar */}
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 py-8 text-xs font-sans text-background/30">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans text-background/40">
                 <p>© 2026 Udaloy Trading Inc. (dba NovaReach). All Rights Reserved.</p>
                 <div className="flex gap-6">
-                    <a href="#/terms" className="hover:text-background/60 transition-colors">Terms & Conditions</a>
-                    <a href="#/privacy" className="hover:text-background/60 transition-colors">Privacy Policy</a>
+                    <a href="#/terms" className="hover:text-background transition-colors">Terms & Conditions</a>
+                    <a href="#/privacy" className="hover:text-background transition-colors">Privacy Policy</a>
                 </div>
             </div>
         </footer>
