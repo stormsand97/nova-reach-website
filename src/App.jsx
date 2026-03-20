@@ -886,7 +886,7 @@ const Footer = () => {
             {/* Top: CTA + Form */}
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 pt-24 pb-16 border-b border-white/10">
                 {/* Left: CTA */}
-                <div className="flex flex-col justify-center">
+                <div className="flex flex-col justify-start pt-2">
                     <div className="flex items-center gap-2 mb-8">
                         <NovaLogo className="w-5 h-5 text-accent" />
                         <span className="font-mono text-xs text-accent uppercase tracking-widest">NovaReach</span>
