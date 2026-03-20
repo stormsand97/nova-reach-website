@@ -911,12 +911,13 @@ const Footer = () => {
                     <ul className="space-y-3 font-sans text-background/70 text-sm">
                         <li>philipp@getnovareach.com</li>
                         <li>+1 782 377 5142</li>
+                        <li className="leading-relaxed">530 Rue Saint-Hubert, Unit 1517<br />Montréal, QC H2Y 0B9, Canada</li>
                     </ul>
                 </div>
             </div>
 
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans text-background/40">
-                <p>© 2026 NovaReach. All Rights Reserved.</p>
+                <p>© 2026 Udaloy Trading Inc. (dba NovaReach). All Rights Reserved.</p>
                 <div className="flex gap-6">
                     <a href="#/terms" className="hover:text-background transition-colors">Terms & Conditions</a>
                     <a href="#/privacy" className="hover:text-background transition-colors">Privacy Policy</a>
