@@ -1136,7 +1136,7 @@ const PrivacyPolicyPage = () => (
 
         <SectionTitle>5. Disclosure of Your Information</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed mb-3">
-            We do <strong>not</strong> sell, rent, or trade your personal information to third parties.
+            We do <strong>not</strong> sell, rent, or trade your personal information to third parties. <strong>Mobile opt-in data and SMS consent information will never be shared with third parties or affiliates for marketing or promotional purposes.</strong>
         </p>
         <p className="font-sans text-textDark/80 leading-relaxed">
             We may share your information only with:
@@ -1237,7 +1237,20 @@ const TermsPage = () => (
             All content on this Site — including text, graphics, logos, software, and branding — is the property of Udaloy Trading Inc. and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content without our prior written consent.
         </p>
 
-        <SectionTitle>6. Acceptable Use</SectionTitle>
+        <SectionTitle>6. SMS Messaging Program</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3">
+            NovaReach operates an SMS messaging program to communicate with leads and clients regarding appointment scheduling, follow-up, service updates, and promotional offers. By opting in, you agree to receive recurring automated text messages from NovaReach at the mobile number provided.
+        </p>
+        <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1">
+            <li><strong>Message frequency varies</strong> based on your interactions and preferences</li>
+            <li><strong>Message and data rates may apply.</strong> Check with your mobile carrier for details</li>
+            <li><strong>To opt out</strong>, reply <strong>STOP</strong> to any message at any time. You will receive a confirmation and no further messages will be sent</li>
+            <li><strong>For help</strong>, reply <strong>HELP</strong> or contact us at <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a></li>
+            <li>Carriers are not liable for delayed or undelivered messages</li>
+            <li>You must be <strong>18 years of age or older</strong> to opt in to SMS communications from NovaReach</li>
+        </ul>
+
+        <SectionTitle>7. Acceptable Use</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed mb-2">You agree not to:</p>
         <ul className="list-disc list-inside font-sans text-textDark/80 leading-relaxed space-y-1">
             <li>Use our Site or Services for any unlawful purpose</li>
@@ -1246,7 +1259,7 @@ const TermsPage = () => (
             <li>Engage in any conduct that could harm or damage our reputation</li>
         </ul>
 
-        <SectionTitle>7. Limitation of Liability</SectionTitle>
+        <SectionTitle>8. Limitation of Liability</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed mb-3">
             To the fullest extent permitted by applicable law, Udaloy Trading Inc. and its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including loss of profits, revenue, data, or goodwill — arising out of or in connection with your use of the Site or Services, even if we have been advised of the possibility of such damages.
         </p>
@@ -1254,32 +1267,32 @@ const TermsPage = () => (
             Our total aggregate liability to you for any claim arising out of or relating to these Terms or the Services shall not exceed the total fees paid by you to us in the three (3) months immediately preceding the event giving rise to the claim.
         </p>
 
-        <SectionTitle>8. Indemnification</SectionTitle>
+        <SectionTitle>9. Indemnification</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             You agree to indemnify, defend, and hold harmless Udaloy Trading Inc. and its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, costs, and expenses (including reasonable legal fees) arising out of or in any way connected with your use of the Services or your breach of these Terms.
         </p>
 
-        <SectionTitle>9. Governing Law &amp; Jurisdiction</SectionTitle>
+        <SectionTitle>10. Governing Law &amp; Jurisdiction</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             These Terms are governed by and construed in accordance with the laws of the Province of <strong>Prince Edward Island</strong> and the federal laws of <strong>Canada</strong> applicable therein. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of Prince Edward Island, Canada.
         </p>
 
-        <SectionTitle>10. Changes to These Terms</SectionTitle>
+        <SectionTitle>11. Changes to These Terms</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             We reserve the right to modify these Terms at any time. The updated Terms will be posted on this page with a revised effective date. Your continued use of the Site or Services following any changes constitutes your acceptance of the revised Terms.
         </p>
 
-        <SectionTitle>11. Severability</SectionTitle>
+        <SectionTitle>12. Severability</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             If any provision of these Terms is held to be invalid or unenforceable, that provision shall be modified to the minimum extent necessary, and the remaining provisions shall continue in full force and effect.
         </p>
 
-        <SectionTitle>12. Entire Agreement</SectionTitle>
+        <SectionTitle>13. Entire Agreement</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             These Terms, together with any service agreement or written proposal provided to you, constitute the entire agreement between you and Udaloy Trading Inc. with respect to their subject matter and supersede all prior agreements and understandings.
         </p>
 
-        <SectionTitle>13. Contact</SectionTitle>
+        <SectionTitle>14. Contact</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             Udaloy Trading Inc. (dba NovaReach)<br />
             530 Rue Saint-Hubert, Unit 1517<br />
