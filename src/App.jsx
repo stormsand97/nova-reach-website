@@ -903,7 +903,7 @@ const Footer = () => {
                 <div>
                     <iframe
                         src="https://link.getnovareach.com/widget/form/fvc0iNhRX6I3IWeRiDqz"
-                        style={{ width: "100%", height: "780px", border: "none", borderRadius: "16px" }}
+                        style={{ width: "100%", height: "560px", border: "none", borderRadius: "16px" }}
                         id="inline-fvc0iNhRX6I3IWeRiDqz"
                         data-layout="{'id':'INLINE'}"
                         data-form-id="fvc0iNhRX6I3IWeRiDqz"
