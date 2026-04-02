@@ -1359,52 +1359,6 @@ function App() {
     );
 }
 
-const OptInPage = () => {
-    useEffect(() => { window.scrollTo(0, 0); }, []);
-    return (
-        <div className="bg-textDark min-h-screen selection:bg-accent selection:text-white">
-            <Navbar />
-            <main className="max-w-2xl mx-auto px-6 pt-36 pb-24">
-                <p className="font-mono text-xs text-accent uppercase tracking-widest mb-3">Get Started</p>
-                <h1 className="font-heading font-bold text-4xl text-background mb-4">Book Your Free Demo</h1>
-                <p className="font-sans text-background/50 leading-relaxed mb-10">
-                    See exactly how many appointments you're leaving on the table — and how we fix it in under 48 hours.
-                </p>
-
-                {/* Consent disclosure — visible to scanner and users */}
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-4">
-                    <div className="flex items-start gap-3 mb-4">
-                        <input
-                            type="checkbox"
-                            id="sms-consent"
-                            className="mt-1 w-4 h-4 accent-accent cursor-pointer flex-shrink-0"
-                        />
-                        <label htmlFor="sms-consent" className="font-sans text-sm text-background/80 leading-relaxed cursor-pointer">
-                            I agree to receive SMS messages from <strong>NovaReach (Udaloy Trading Inc.)</strong> at the number I provide.
-                        </label>
-                    </div>
-                    <p className="font-sans text-xs text-background/40 leading-relaxed mb-3">
-                        By checking this box, you consent to receive recurring automated SMS messages from NovaReach (Udaloy Trading Inc.) at the mobile number provided. Message types include promotional offers, appointment reminders, and service updates. Message frequency varies. Message &amp; data rates may apply. Consent is not a condition of purchase. Reply <strong className="text-background/60">STOP</strong> to opt out at any time. Reply <strong className="text-background/60">HELP</strong> for assistance. View our <a href="#/privacy" className="text-accent hover:underline">Privacy Policy</a> and <a href="#/terms" className="text-accent hover:underline">Terms &amp; Conditions</a>.
-                    </p>
-                    <p className="font-sans text-xs text-background/50 leading-relaxed border-t border-white/10 pt-3">
-                        <strong className="text-background/60">No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</strong> Mobile opt-in data and SMS consent are not sold, rented, or traded to any third party. Carriers are not liable for delayed or undelivered messages.
-                    </p>
-                </div>
-
-                {/* GHL form */}
-                <iframe
-                    src="https://link.getnovareach.com/widget/form/fvc0iNhRX6I3IWeRiDqz"
-                    style={{ width: "100%", height: "560px", border: "none", borderRadius: "16px" }}
-                    id="optin-fvc0iNhRX6I3IWeRiDqz"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-id="fvc0iNhRX6I3IWeRiDqz"
-                    title="Opt-in Form"
-                />
-            </main>
-            <Footer />
-        </div>
-    );
-};
 
 function Root() {
     const [hash, setHash] = useState(window.location.hash);
@@ -1416,7 +1370,6 @@ function Root() {
 
     if (hash === '#/privacy') return <PrivacyPolicyPage />;
     if (hash === '#/terms') return <TermsPage />;
-    if (hash === '#/optin') return <OptInPage />;
     return <App />;
 }
 
