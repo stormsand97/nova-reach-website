@@ -1130,8 +1130,11 @@ const PrivacyPolicyPage = () => (
         </ul>
 
         <SectionTitle>4. SMS Communications</SectionTitle>
+        <p className="font-sans text-textDark/80 leading-relaxed mb-3">
+            By providing your phone number and checking the SMS consent box on our opt-in form at <strong>getnovareach.com</strong>, you consent to receive recurring automated SMS text messages from NovaReach (Udaloy Trading Inc.) regarding appointment scheduling, follow-up communications, promotional offers, and service information. Message frequency varies. Message and data rates may apply. You may opt out at any time by replying <strong>STOP</strong> to any message we send. Reply <strong>HELP</strong> for assistance.
+        </p>
         <p className="font-sans text-textDark/80 leading-relaxed">
-            By providing your phone number and submitting our form, you consent to receive SMS text messages from NovaReach regarding appointment scheduling, follow-up communications, and service information. Message and data rates may apply. You may opt out at any time by replying <strong>STOP</strong> to any message we send.
+            <strong>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</strong> Mobile opt-in data and SMS consent information will never be sold, rented, or traded to any third party.
         </p>
 
         <SectionTitle>5. Disclosure of Your Information</SectionTitle>
@@ -1380,8 +1383,11 @@ const OptInPage = () => {
                             I agree to receive SMS messages from <strong>NovaReach (Udaloy Trading Inc.)</strong> at the number I provide.
                         </label>
                     </div>
-                    <p className="font-sans text-xs text-background/40 leading-relaxed">
-                        By checking this box, you consent to receive automated SMS messages from NovaReach (Udaloy Trading Inc.) at the number provided. Message types include promotional offers, appointment updates, and service information. Message frequency varies. Message &amp; data rates may apply. Consent is not a condition of purchase. Reply <strong className="text-background/60">STOP</strong> to opt out at any time. Reply <strong className="text-background/60">HELP</strong> for help. View our <a href="#/privacy" className="text-accent hover:underline">Privacy Policy</a> and <a href="#/terms" className="text-accent hover:underline">Terms &amp; Conditions</a>.
+                    <p className="font-sans text-xs text-background/40 leading-relaxed mb-3">
+                        By checking this box, you consent to receive recurring automated SMS messages from NovaReach (Udaloy Trading Inc.) at the mobile number provided. Message types include promotional offers, appointment reminders, and service updates. Message frequency varies. Message &amp; data rates may apply. Consent is not a condition of purchase. Reply <strong className="text-background/60">STOP</strong> to opt out at any time. Reply <strong className="text-background/60">HELP</strong> for assistance. View our <a href="#/privacy" className="text-accent hover:underline">Privacy Policy</a> and <a href="#/terms" className="text-accent hover:underline">Terms &amp; Conditions</a>.
+                    </p>
+                    <p className="font-sans text-xs text-background/50 leading-relaxed border-t border-white/10 pt-3">
+                        <strong className="text-background/60">No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</strong> Mobile opt-in data and SMS consent are not sold, rented, or traded to any third party. Carriers are not liable for delayed or undelivered messages.
                     </p>
                 </div>
 
