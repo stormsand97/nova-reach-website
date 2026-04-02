@@ -911,7 +911,7 @@ const Footer = () => {
                     <ul className="space-y-3 font-sans text-background/70 text-sm">
                         <li>philipp@getnovareach.com</li>
                         <li>+1 782 377 5142</li>
-                        <li className="leading-relaxed">530 Rue Saint-Hubert, Unit 1517<br />Montréal, QC H2Y 0B9, Canada</li>
+                        <li className="leading-relaxed">530 Rue Saint-Hubert<br />Montréal, QC H2Y 0B9, Canada</li>
                     </ul>
                 </div>
             </div>
@@ -1098,7 +1098,7 @@ const PrivacyPolicyPage = () => (
         <SectionTitle>1. Who We Are</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             Udaloy Trading Inc. (dba NovaReach)<br />
-            530 Rue Saint-Hubert, Unit 1517<br />
+            530 Rue Saint-Hubert<br />
             Montréal, QC H2Y 0B9, Canada<br /><br />
             Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
             Phone: +1 782 377 5142
@@ -1190,7 +1190,7 @@ const PrivacyPolicyPage = () => (
         <SectionTitle>12. Contact Us</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             Udaloy Trading Inc. (dba NovaReach)<br />
-            530 Rue Saint-Hubert, Unit 1517<br />
+            530 Rue Saint-Hubert<br />
             Montréal, QC H2Y 0B9, Canada<br /><br />
             Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
             Phone: +1 782 377 5142
@@ -1211,7 +1211,7 @@ const TermsPage = () => (
         <SectionTitle>1. About Us</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             Udaloy Trading Inc. (dba NovaReach)<br />
-            530 Rue Saint-Hubert, Unit 1517<br />
+            530 Rue Saint-Hubert<br />
             Montréal, QC H2Y 0B9, Canada<br /><br />
             Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a>
         </p>
@@ -1298,7 +1298,7 @@ const TermsPage = () => (
         <SectionTitle>14. Contact</SectionTitle>
         <p className="font-sans text-textDark/80 leading-relaxed">
             Udaloy Trading Inc. (dba NovaReach)<br />
-            530 Rue Saint-Hubert, Unit 1517<br />
+            530 Rue Saint-Hubert<br />
             Montréal, QC H2Y 0B9, Canada<br /><br />
             Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
             Phone: +1 782 377 5142
