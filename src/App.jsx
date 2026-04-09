@@ -1044,10 +1044,10 @@ const Booking = () => {
                 </div>
 
                 {/* Embedded GoHighLevel Calendar */}
-                <div className="w-full relative bg-transparent rounded-3xl overflow-hidden min-h-[1100px]">
+                <div className="w-full relative bg-transparent rounded-3xl overflow-hidden min-h-[1400px]">
                     <iframe
                         src="https://link.getnovareach.com/widget/booking/6NcWYvkBLotKqPRTE7q8"
-                        style={{ width: "100%", border: "none", overflow: "hidden", minHeight: "1100px" }}
+                        style={{ width: "100%", border: "none", overflow: "hidden", minHeight: "1400px" }}
                         scrolling="no"
                         id="6NcWYvkBLotKqPRTE7q8_1775751071362"
                     />
