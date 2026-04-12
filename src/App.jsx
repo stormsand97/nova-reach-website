@@ -1058,6 +1058,72 @@ const Booking = () => {
 };
 
 // ----------------------------------------------------------------------------
+// K. CALCULATOR TEASER SECTION
+// ----------------------------------------------------------------------------
+
+const CalculatorTeaser = () => {
+    const ref = useRef(null);
+
+    useEffect(() => {
+        let ctx = gsap.context(() => {
+            gsap.fromTo('.ct-stat',
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1, y: 0, stagger: 0.15, duration: 0.8,
+                    scrollTrigger: { trigger: ref.current, start: 'top 70%' }
+                }
+            );
+            gsap.fromTo('.ct-copy',
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1, y: 0, duration: 0.8,
+                    scrollTrigger: { trigger: ref.current, start: 'top 65%' }
+                }
+            );
+        }, ref);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={ref} className="py-20 relative z-10" style={{ background: '#0A0A0A' }}>
+            <div className="max-w-6xl mx-auto px-6 md:px-12">
+                <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-24 mb-14">
+                    {[
+                        { stat: '8–15%', label: 'Industry Reactivation Rate' },
+                        { stat: '$12,750', label: 'Avg. Recoverable Revenue' },
+                        { stat: '43x', label: 'Typical Monthly ROI' },
+                    ].map(({ stat, label }) => (
+                        <div key={label} className="ct-stat text-center">
+                            <div style={{ fontFamily: '"Space Mono", monospace', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 700, color: '#D36B42', lineHeight: 1 }}>{stat}</div>
+                            <div style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(242,235,229,0.45)', textTransform: 'uppercase', marginTop: '8px' }}>{label}</div>
+                        </div>
+                    ))}
+                </div>
+                <div className="ct-copy text-center">
+                    <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '10px', letterSpacing: '0.18em', color: '#D36B42', textTransform: 'uppercase', marginBottom: '14px' }}>
+                        NovaReach — Re-Ignite System
+                    </p>
+                    <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)', fontWeight: 700, color: '#F2EBE5', marginBottom: '12px', letterSpacing: '-0.5px', lineHeight: 1.15 }}>
+                        Your past customers are worth more than you think.
+                    </h2>
+                    <p style={{ fontSize: '16px', color: 'rgba(242,235,229,0.55)', maxWidth: '480px', margin: '0 auto 32px', lineHeight: 1.65 }}>
+                        See exactly how much revenue is sitting dormant in your existing customer list.
+                    </p>
+                    <a
+                        href="#/calculator"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#D36B42', color: '#fff', fontWeight: 700, fontSize: '15px', padding: '14px 28px', borderRadius: '8px', textDecoration: 'none', transition: 'background 0.2s, transform 0.15s', fontFamily: '"Space Grotesk", sans-serif' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = '#E8956E'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = '#D36B42'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                    >
+                        Calculate My Revenue →
+                    </a>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// ----------------------------------------------------------------------------
 // MAIN APP COMPONENT
 // ----------------------------------------------------------------------------
 
@@ -1332,6 +1398,7 @@ function App() {
             <Hero />
             <Features />
             <RevenueCalculator />
+            <CalculatorTeaser />
             <InstantBookingInfo />
             <HowItWorks />
             <Industries />
@@ -1343,6 +1410,262 @@ function App() {
 }
 
 
+// ----------------------------------------------------------------------------
+// CALCULATOR PAGE
+// ----------------------------------------------------------------------------
+
+const CALC_STYLES = `
+.cr-wrap { max-width: 860px; margin: 0 auto; padding: 120px 24px 80px; }
+.cr-header { text-align: center; margin-bottom: 40px; }
+.cr-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .18em; color: #D36B42; background: rgba(211,107,66,.1); border: 1px solid rgba(211,107,66,.2); border-radius: 20px; padding: 4px 14px; margin-bottom: 18px; text-transform: uppercase; }
+.cr-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 4vw, 40px); font-weight: 700; letter-spacing: -1px; line-height: 1.1; color: #F2EBE5; margin-bottom: 10px; }
+.cr-title span { color: #D36B42; }
+.cr-sub { font-size: 14px; color: rgba(242,235,229,0.55); max-width: 480px; margin: 0 auto; line-height: 1.65; }
+.cr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+@media (max-width: 640px) { .cr-grid { grid-template-columns: 1fr; } }
+.cr-card { background: #161616; border: 1px solid #252525; border-radius: 12px; padding: 28px; }
+.cr-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #F2EBE5; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.cr-step-badge { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; color: #D36B42; background: rgba(211,107,66,.1); border-radius: 20px; padding: 2px 8px; }
+.cr-field { margin-bottom: 18px; }
+.cr-field:last-child { margin-bottom: 0; }
+.cr-field label { display: block; font-size: 12px; color: rgba(242,235,229,0.55); margin-bottom: 6px; font-family: 'Space Mono', monospace; letter-spacing: .05em; }
+.cr-hint { font-size: 11px; color: rgba(242,235,229,.3); margin-top: 4px; line-height: 1.4; }
+.cr-input-wrap { position: relative; display: flex; align-items: center; }
+.cr-prefix { position: absolute; left: 12px; font-family: 'Space Mono', monospace; font-size: 13px; color: #D36B42; pointer-events: none; z-index: 1; }
+.cr-num-input { width: 100%; background: #1C1C1C; border: 1px solid #2E2E2E; border-radius: 8px; color: #F2EBE5; font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; outline: none; padding: 10px 12px; -moz-appearance: textfield; transition: border-color .2s, box-shadow .2s; }
+.cr-num-input.has-prefix { padding-left: 28px; }
+.cr-num-input::-webkit-inner-spin-button, .cr-num-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.cr-num-input:focus { border-color: rgba(211,107,66,.5); box-shadow: 0 0 0 3px rgba(211,107,66,.08); }
+.cr-range { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px; background: #2E2E2E; cursor: pointer; border: none; padding: 0; outline: none; }
+.cr-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #D36B42; cursor: pointer; box-shadow: 0 0 0 3px rgba(211,107,66,.2); transition: box-shadow .2s, transform .2s; }
+.cr-range::-webkit-slider-thumb:hover { box-shadow: 0 0 0 6px rgba(211,107,66,.15); transform: scale(1.1); }
+.cr-range-labels { display: flex; justify-content: space-between; margin-top: 6px; }
+.cr-range-labels span { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(242,235,229,.3); }
+.cr-range-val { text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; color: #D36B42; margin-top: 4px; }
+.cr-divider { height: 1px; background: #252525; margin: 20px 0; }
+.cr-results { background: #1A2F25; border: 1px solid rgba(126,200,160,.15); border-radius: 12px; padding: 28px; }
+.cr-results-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .18em; color: #7EC8A0; text-transform: uppercase; margin-bottom: 20px; opacity: .8; }
+.cr-big-num { margin-bottom: 8px; }
+.cr-blabel { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .12em; color: rgba(126,200,160,.7); text-transform: uppercase; margin-bottom: 4px; }
+.cr-bvalue { font-family: 'Space Mono', monospace; font-size: clamp(28px, 5vw, 44px); font-weight: 700; color: #7EC8A0; line-height: 1; }
+.cr-bsub { font-size: 12px; color: rgba(242,235,229,.45); margin-top: 4px; }
+.cr-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.cr-stat-box { background: rgba(0,0,0,.2); border: 1px solid rgba(126,200,160,.1); border-radius: 8px; padding: 14px 16px; }
+.cr-slabel { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; color: rgba(126,200,160,.6); text-transform: uppercase; margin-bottom: 4px; }
+.cr-sval { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: #7EC8A0; }
+.cr-res-divider { height: 1px; background: rgba(126,200,160,.15); margin: 20px 0; }
+.cr-verdict { margin-top: 20px; background: rgba(0,0,0,.25); border: 1px solid rgba(211,107,66,.2); border-radius: 8px; padding: 14px 16px; }
+.cr-vlabel { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; color: #D36B42; text-transform: uppercase; margin-bottom: 6px; }
+.cr-vtext { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #F2EBE5; line-height: 1.5; }
+.cr-vtext span { color: #D36B42; }
+.cr-roi-card { grid-column: 1 / -1; background: #161616; border: 1px solid #252525; border-radius: 12px; padding: 28px; }
+.cr-roi-title { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #F2EBE5; margin-bottom: 20px; }
+.cr-bar-wrap { margin-bottom: 24px; }
+.cr-bar-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.cr-bar-label-row span { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .08em; color: rgba(242,235,229,0.55); }
+.cr-bar-label-row strong { font-family: 'Space Mono', monospace; font-size: 12px; color: #D36B42; }
+.cr-bar-track { height: 8px; background: #1C1C1C; border-radius: 4px; overflow: hidden; }
+.cr-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #D36B42, #E8956E); transition: width .5s cubic-bezier(.16,1,.3,1); }
+.cr-bar-fill.green { background: linear-gradient(90deg, #1A7A3C, #7EC8A0); }
+.cr-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; margin-top: 24px; }
+.cr-compare-col { background: #1C1C1C; border: 1px solid #252525; border-radius: 8px; padding: 16px; }
+.cr-compare-col.bad { border-color: rgba(192,57,43,.25); }
+.cr-compare-col.good { background: #1A2F25; border-color: rgba(126,200,160,.2); }
+.cr-clabel { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+.cr-compare-col.bad .cr-clabel { color: rgba(192,57,43,.8); }
+.cr-compare-col.good .cr-clabel { color: rgba(126,200,160,.7); }
+.cr-cval { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.cr-compare-col.bad .cr-cval { color: #E06060; }
+.cr-compare-col.good .cr-cval { color: #7EC8A0; }
+.cr-cdesc { font-size: 11px; color: rgba(242,235,229,.45); line-height: 1.4; }
+.cr-vs { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #D36B42; border: 2px solid rgba(211,107,66,.3); border-radius: 6px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin: 0 auto; }
+.cr-close { grid-column: 1 / -1; background: #1A2F25; border: 1px solid rgba(126,200,160,.2); border-radius: 12px; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.cr-close-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .12em; color: rgba(126,200,160,.7); text-transform: uppercase; margin-bottom: 4px; }
+.cr-close-headline { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: #F2EBE5; line-height: 1.3; }
+.cr-close-headline span { color: #D36B42; }
+.cr-close-sub { font-size: 12px; color: rgba(242,235,229,.5); margin-top: 4px; }
+.cr-cta-btn { background: #D36B42; color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: background .2s, transform .15s; text-decoration: none; display: inline-block; }
+.cr-cta-btn:hover { background: #E8956E; transform: translateY(-1px); }
+.cr-cta-btn:active { transform: translateY(0); }
+.cr-footnote { margin-top: 28px; text-align: center; font-size: 11px; color: rgba(242,235,229,.25); font-family: 'Space Mono', monospace; letter-spacing: .05em; line-height: 1.6; }
+`;
+
+const CalculatorPage = () => {
+    useEffect(() => { window.scrollTo(0, 0); }, []);
+
+    const [jobValue, setJobValue] = useState(850);
+    const [listSize, setListSize] = useState(180);
+    const [dormantMonths, setDormantMonths] = useState(12);
+    const [reactRate, setReactRate] = useState(10);
+    const [upsellRate, setUpsellRate] = useState(20);
+
+    const baseJobs = Math.round(listSize * (reactRate / 100));
+    const upsellJobs = Math.round(baseJobs * (upsellRate / 100));
+    const totalJobs = baseJobs + upsellJobs;
+    const totalRevenue = Math.round(totalJobs * jobValue);
+    const monthlyCost = 297;
+    const roi = totalRevenue > 0 ? totalRevenue / monthlyCost : 0;
+    const payback = totalRevenue > 0 ? Math.round((monthlyCost / totalRevenue) * 30) : 0;
+    const dormantYears = dormantMonths / 12;
+    const annualOppy = Math.round(listSize * (reactRate / 100) * jobValue * (1 + upsellRate / 100));
+    const leftOnTable = Math.round(annualOppy * dormantYears);
+    const barWidth = Math.min(100, Math.round((totalRevenue / (monthlyCost * 10)) * 100));
+
+    const fmtFull = (n) => '$' + Math.round(n).toLocaleString();
+
+    let verdict;
+    if (totalRevenue < 500) {
+        verdict = `Smaller list — but even ${baseJobs} rebooked jobs at ${fmtFull(jobValue)} each puts you at ${fmtFull(totalRevenue)} in 30 days. That's <span>${roi.toFixed(1)}x your monthly investment.</span>`;
+    } else if (roi >= 10) {
+        verdict = `<span>${fmtFull(totalRevenue)} recovered in one blast</span> — that's ${roi.toFixed(0)}x your monthly cost. The only question left is delivery.`;
+    } else if (roi >= 3) {
+        verdict = `${fmtFull(totalRevenue)} from a list that's been dormant for ${dormantMonths} months. <span>${roi.toFixed(1)}x ROI</span> before reviews or AI booking even kick in.`;
+    } else {
+        verdict = `Even at conservative rates, you're looking at <span>${fmtFull(totalRevenue)}</span> from contacts you already own. No ad spend required.`;
+    }
+
+    const closeHeadline = totalRevenue > 0
+        ? `At <span>${fmtFull(totalRevenue)}</span> recoverable, the math decides — not the pitch.`
+        : 'The math makes the decision — not the pitch.';
+
+    const closeSub = totalRevenue > 0
+        ? `The ${fmtFull(monthlyCost)}/mo investment pays for itself ${roi.toFixed(1)}x over from this blast alone.`
+        : "Once you see the number, the only question is: do you believe we can deliver it?";
+
+    const paybackDisplay = payback > 0 && payback <= 7 ? '< 1 week' : payback > 0 ? `${payback} days` : '—';
+
+    return (
+        <div style={{ background: '#0A0A0A', minHeight: '100dvh' }} className="selection:bg-accent selection:text-white">
+            <style>{CALC_STYLES}</style>
+            <Navbar />
+            <div className="cr-wrap">
+                <div className="cr-header">
+                    <div className="cr-badge">NovaReach — Re-Ignite System</div>
+                    <h1 className="cr-title">How much revenue is<br /><span>sitting in your list?</span></h1>
+                    <p className="cr-sub">Enter your average job value and existing customer count below. We'll calculate exactly how much you're leaving on the table — and what the Re-Ignite System returns.</p>
+                </div>
+
+                <div className="cr-grid">
+                    {/* Input Card */}
+                    <div className="cr-card">
+                        <div className="cr-card-title">Your Numbers <span className="cr-step-badge">STEP 01</span></div>
+
+                        <div className="cr-field">
+                            <label>Average Job Value (CAD)</label>
+                            <div className="cr-input-wrap">
+                                <span className="cr-prefix">$</span>
+                                <input type="number" className="cr-num-input has-prefix" value={jobValue} min={100} max={20000} step={50}
+                                    onChange={e => setJobValue(parseFloat(e.target.value) || 0)} />
+                            </div>
+                            <div className="cr-hint">Typical HVAC service call, tune-up, or repair booking average</div>
+                        </div>
+
+                        <div className="cr-field">
+                            <label>Number of Past Customers in Your List</label>
+                            <div className="cr-input-wrap">
+                                <input type="number" className="cr-num-input" value={listSize} min={10} max={5000} step={10}
+                                    onChange={e => setListSize(parseInt(e.target.value) || 0)} />
+                            </div>
+                            <div className="cr-hint">Contacts in your phone, old invoices, or CRM — even if unorganized</div>
+                        </div>
+
+                        <div className="cr-divider" />
+
+                        <div className="cr-field">
+                            <label>How many months since last contact?</label>
+                            <input type="range" className="cr-range" min={3} max={36} value={dormantMonths} step={3}
+                                onChange={e => setDormantMonths(parseInt(e.target.value))} />
+                            <div className="cr-range-val">{dormantMonths} months</div>
+                            <div className="cr-range-labels"><span>3 mo</span><span>36 mo</span></div>
+                        </div>
+
+                        <div className="cr-field">
+                            <label>Reactivation Rate (industry avg: 8–15%)</label>
+                            <input type="range" className="cr-range" min={5} max={25} value={reactRate} step={1}
+                                onChange={e => setReactRate(parseInt(e.target.value))} />
+                            <div className="cr-range-val">{reactRate}%</div>
+                            <div className="cr-range-labels"><span>5%</span><span>25%</span></div>
+                        </div>
+
+                        <div className="cr-field">
+                            <label>Upsell / Repeat Job Rate</label>
+                            <input type="range" className="cr-range" min={0} max={50} value={upsellRate} step={5}
+                                onChange={e => setUpsellRate(parseInt(e.target.value))} />
+                            <div className="cr-range-val">{upsellRate}%</div>
+                            <div className="cr-range-labels"><span>0%</span><span>50%</span></div>
+                        </div>
+                    </div>
+
+                    {/* Results Card */}
+                    <div className="cr-results">
+                        <div className="cr-results-title">Your Revenue Opportunity</div>
+                        <div className="cr-big-num">
+                            <div className="cr-blabel">Recoverable Revenue (1 Blast)</div>
+                            <div className="cr-bvalue">{fmtFull(totalRevenue)}</div>
+                            <div className="cr-bsub">From reactivation alone — before reviews, AI booking, or inbound</div>
+                        </div>
+                        <div className="cr-res-divider" />
+                        <div className="cr-stat-row">
+                            <div className="cr-stat-box"><div className="cr-slabel">Jobs Booked</div><div className="cr-sval">{baseJobs}</div></div>
+                            <div className="cr-stat-box"><div className="cr-slabel">With Upsell</div><div className="cr-sval">{totalJobs}</div></div>
+                            <div className="cr-stat-box"><div className="cr-slabel">Monthly ROI</div><div className="cr-sval">{roi.toFixed(1)}x</div></div>
+                            <div className="cr-stat-box"><div className="cr-slabel">Payback Period</div><div className="cr-sval">{paybackDisplay}</div></div>
+                        </div>
+                        <div className="cr-verdict">
+                            <div className="cr-vlabel">The Math</div>
+                            <div className="cr-vtext" dangerouslySetInnerHTML={{ __html: verdict }} />
+                        </div>
+                    </div>
+
+                    {/* ROI Card */}
+                    <div className="cr-roi-card">
+                        <div className="cr-roi-title">What Does $297/mo Actually Buy?</div>
+                        <div className="cr-bar-wrap">
+                            <div className="cr-bar-label-row"><span>Your Monthly Investment</span><strong>$297 / month</strong></div>
+                            <div className="cr-bar-track"><div className="cr-bar-fill" style={{ width: '100%' }} /></div>
+                        </div>
+                        <div className="cr-bar-wrap">
+                            <div className="cr-bar-label-row"><span>Revenue from 1 Reactivation Blast</span><strong>{fmtFull(totalRevenue)}</strong></div>
+                            <div className="cr-bar-track"><div className="cr-bar-fill green" style={{ width: `${barWidth}%` }} /></div>
+                        </div>
+                        <div className="cr-compare">
+                            <div className="cr-compare-col bad">
+                                <div className="cr-clabel">Without Re-Ignite</div>
+                                <div className="cr-cval">{fmtFull(leftOnTable)}</div>
+                                <div className="cr-cdesc">Left unreachable in your contacts for another year</div>
+                            </div>
+                            <div className="cr-vs">VS</div>
+                            <div className="cr-compare-col good">
+                                <div className="cr-clabel">With Re-Ignite</div>
+                                <div className="cr-cval">{fmtFull(totalRevenue)}</div>
+                                <div className="cr-cdesc">Recovered in 30 days — then reviews and AI booking layer on top</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Close Line */}
+                    <div className="cr-close">
+                        <div>
+                            <div className="cr-close-label">The Only Objection Left</div>
+                            <div className="cr-close-headline" dangerouslySetInnerHTML={{ __html: closeHeadline }} />
+                            <div className="cr-close-sub">{closeSub}</div>
+                        </div>
+                        <a href="#booking" className="cr-cta-btn">
+                            Get Started — $297/mo →
+                        </a>
+                    </div>
+                </div>
+
+                <div className="cr-footnote">
+                    Reactivation revenue estimates are based on industry-average response rates (8–15%) for SMS reactivation campaigns.<br />
+                    Individual results vary based on list quality, recency, and offer. Past customers who received service within 24 months convert at 2–3× the average rate.
+                </div>
+            </div>
+            <Footer />
+        </div>
+    );
+};
+
 function Root() {
     const [hash, setHash] = useState(window.location.hash);
     useEffect(() => {
@@ -1353,6 +1676,7 @@ function Root() {
 
     if (hash === '#/privacy') return <PrivacyPolicyPage />;
     if (hash === '#/terms') return <TermsPage />;
+    if (hash === '#/calculator') return <CalculatorPage />;
     return <App />;
 }
 
