@@ -1047,7 +1047,7 @@ const Booking = () => {
                 <div className="w-full relative bg-transparent rounded-3xl overflow-hidden">
                     <iframe
                         src="https://link.getnovareach.com/widget/booking/qFRTVGZv9LgH5ic3teRC"
-                        style={{ width: "100%", border: "none", overflow: "hidden", height: "900px" }}
+                        style={{ width: "100%", border: "none", overflow: "hidden", height: "1150px" }}
                         scrolling="no"
                         id="qFRTVGZv9LgH5ic3teRC_1775851920443"
                     />
