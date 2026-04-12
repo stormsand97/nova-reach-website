@@ -910,7 +910,7 @@ const Footer = () => {
                     <h4 className="font-sans font-bold text-background mb-4 text-sm tracking-wider uppercase opacity-50">Contact</h4>
                     <ul className="space-y-3 font-sans text-background/70 text-sm">
                         <li>philipp@getnovareach.com</li>
-                        <li>+1 782 377 5142</li>
+                        <li>+1 249-421-7705</li>
                         <li className="leading-relaxed">530 Rue Saint-Hubert<br />Montréal, QC H2Y 0B9, Canada</li>
                     </ul>
                 </div>
@@ -1044,10 +1044,10 @@ const Booking = () => {
                 </div>
 
                 {/* Embedded GoHighLevel Calendar */}
-                <div className="w-full relative bg-transparent rounded-3xl overflow-hidden min-h-[1400px]">
+                <div className="w-full relative bg-transparent rounded-3xl overflow-hidden">
                     <iframe
                         src="https://link.getnovareach.com/widget/booking/qFRTVGZv9LgH5ic3teRC"
-                        style={{ width: "100%", border: "none", overflow: "hidden", minHeight: "1400px" }}
+                        style={{ width: "100%", border: "none", overflow: "hidden", height: "900px" }}
                         scrolling="no"
                         id="qFRTVGZv9LgH5ic3teRC_1775851920443"
                     />
@@ -1167,7 +1167,7 @@ const PrivacyPolicyPage = () => (
             530 Rue Saint-Hubert<br />
             Montréal, QC H2Y 0B9, Canada<br /><br />
             Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
-            Phone: +1 782 377 5142
+            Phone: +1 249-421-7705
         </p>
 
         <SectionTitle>2. Information We Collect</SectionTitle>
@@ -1259,7 +1259,7 @@ const PrivacyPolicyPage = () => (
             530 Rue Saint-Hubert<br />
             Montréal, QC H2Y 0B9, Canada<br /><br />
             Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
-            Phone: +1 782 377 5142
+            Phone: +1 249-421-7705
         </p>
     </LegalPage>
 );
@@ -1367,7 +1367,7 @@ const TermsPage = () => (
             530 Rue Saint-Hubert<br />
             Montréal, QC H2Y 0B9, Canada<br /><br />
             Email: <a href="mailto:philipp@getnovareach.com" className="text-accent hover:underline">philipp@getnovareach.com</a><br />
-            Phone: +1 782 377 5142
+            Phone: +1 249-421-7705
         </p>
     </LegalPage>
 );
