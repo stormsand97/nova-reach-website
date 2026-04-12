@@ -1421,7 +1421,7 @@ const CALC_STYLES = `
 .cr-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 4vw, 40px); font-weight: 700; letter-spacing: -1px; line-height: 1.1; color: #F2EBE5; margin-bottom: 10px; }
 .cr-title span { color: #D36B42; }
 .cr-sub { font-size: 14px; color: rgba(242,235,229,0.55); max-width: 480px; margin: 0 auto; line-height: 1.65; }
-.cr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.cr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
 @media (max-width: 640px) { .cr-grid { grid-template-columns: 1fr; } }
 .cr-card { background: #161616; border: 1px solid #252525; border-radius: 12px; padding: 28px; }
 .cr-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #F2EBE5; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
