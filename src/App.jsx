@@ -1411,257 +1411,397 @@ function App() {
 
 
 // ----------------------------------------------------------------------------
-// CALCULATOR PAGE
+// CALCULATOR PAGE (Re-Ignite Landing Page)
 // ----------------------------------------------------------------------------
 
-const CALC_STYLES = `
-.cr-wrap { max-width: 860px; margin: 0 auto; padding: 120px 24px 80px; }
-.cr-header { text-align: center; margin-bottom: 40px; }
-.cr-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .18em; color: #D36B42; background: rgba(211,107,66,.1); border: 1px solid rgba(211,107,66,.2); border-radius: 20px; padding: 4px 14px; margin-bottom: 18px; text-transform: uppercase; }
-.cr-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 4vw, 40px); font-weight: 700; letter-spacing: -1px; line-height: 1.1; color: #F2EBE5; margin-bottom: 10px; }
-.cr-title span { color: #D36B42; }
-.cr-sub { font-size: 14px; color: rgba(242,235,229,0.55); max-width: 480px; margin: 0 auto; line-height: 1.65; }
-.cr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
-@media (max-width: 640px) { .cr-grid { grid-template-columns: 1fr; } }
-.cr-card { background: #161616; border: 1px solid #252525; border-radius: 12px; padding: 28px; }
-.cr-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #F2EBE5; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-.cr-step-badge { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; color: #D36B42; background: rgba(211,107,66,.1); border-radius: 20px; padding: 2px 8px; }
-.cr-field { margin-bottom: 18px; }
-.cr-field:last-child { margin-bottom: 0; }
-.cr-field label { display: block; font-size: 12px; color: rgba(242,235,229,0.55); margin-bottom: 6px; font-family: 'Space Mono', monospace; letter-spacing: .05em; }
-.cr-hint { font-size: 11px; color: rgba(242,235,229,.3); margin-top: 4px; line-height: 1.4; }
-.cr-input-wrap { position: relative; display: flex; align-items: center; }
-.cr-prefix { position: absolute; left: 12px; font-family: 'Space Mono', monospace; font-size: 13px; color: #D36B42; pointer-events: none; z-index: 1; }
-.cr-num-input { width: 100%; background: #1C1C1C; border: 1px solid #2E2E2E; border-radius: 8px; color: #F2EBE5; font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; outline: none; padding: 10px 12px; -moz-appearance: textfield; transition: border-color .2s, box-shadow .2s; }
-.cr-num-input.has-prefix { padding-left: 28px; }
-.cr-num-input::-webkit-inner-spin-button, .cr-num-input::-webkit-outer-spin-button { -webkit-appearance: none; }
-.cr-num-input:focus { border-color: rgba(211,107,66,.5); box-shadow: 0 0 0 3px rgba(211,107,66,.08); }
-.cr-range { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px; background: #2E2E2E; cursor: pointer; border: none; padding: 0; outline: none; }
-.cr-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #D36B42; cursor: pointer; box-shadow: 0 0 0 3px rgba(211,107,66,.2); transition: box-shadow .2s, transform .2s; }
-.cr-range::-webkit-slider-thumb:hover { box-shadow: 0 0 0 6px rgba(211,107,66,.15); transform: scale(1.1); }
-.cr-range-labels { display: flex; justify-content: space-between; margin-top: 6px; }
-.cr-range-labels span { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(242,235,229,.3); }
-.cr-range-val { text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; color: #D36B42; margin-top: 4px; }
-.cr-divider { height: 1px; background: #252525; margin: 20px 0; }
-.cr-results { background: #1A2F25; border: 1px solid rgba(126,200,160,.15); border-radius: 12px; padding: 28px; }
-.cr-results-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .18em; color: #7EC8A0; text-transform: uppercase; margin-bottom: 20px; opacity: .8; }
-.cr-big-num { margin-bottom: 8px; }
-.cr-blabel { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .12em; color: rgba(126,200,160,.7); text-transform: uppercase; margin-bottom: 4px; }
-.cr-bvalue { font-family: 'Space Mono', monospace; font-size: clamp(28px, 5vw, 44px); font-weight: 700; color: #7EC8A0; line-height: 1; }
-.cr-bsub { font-size: 12px; color: rgba(242,235,229,.45); margin-top: 4px; }
-.cr-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
-.cr-stat-box { background: rgba(0,0,0,.2); border: 1px solid rgba(126,200,160,.1); border-radius: 8px; padding: 14px 16px; }
-.cr-slabel { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; color: rgba(126,200,160,.6); text-transform: uppercase; margin-bottom: 4px; }
-.cr-sval { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: #7EC8A0; }
-.cr-res-divider { height: 1px; background: rgba(126,200,160,.15); margin: 20px 0; }
-.cr-verdict { margin-top: 20px; background: rgba(0,0,0,.25); border: 1px solid rgba(211,107,66,.2); border-radius: 8px; padding: 14px 16px; }
-.cr-vlabel { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; color: #D36B42; text-transform: uppercase; margin-bottom: 6px; }
-.cr-vtext { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #F2EBE5; line-height: 1.5; }
-.cr-vtext span { color: #D36B42; }
-.cr-roi-card { grid-column: 1 / -1; background: #161616; border: 1px solid #252525; border-radius: 12px; padding: 28px; }
-.cr-roi-title { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #F2EBE5; margin-bottom: 20px; }
-.cr-bar-wrap { margin-bottom: 24px; }
-.cr-bar-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.cr-bar-label-row span { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .08em; color: rgba(242,235,229,0.55); }
-.cr-bar-label-row strong { font-family: 'Space Mono', monospace; font-size: 12px; color: #D36B42; }
-.cr-bar-track { height: 8px; background: #1C1C1C; border-radius: 4px; overflow: hidden; }
-.cr-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #D36B42, #E8956E); transition: width .5s cubic-bezier(.16,1,.3,1); }
-.cr-bar-fill.green { background: linear-gradient(90deg, #1A7A3C, #7EC8A0); }
-.cr-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; margin-top: 24px; }
-.cr-compare-col { background: #1C1C1C; border: 1px solid #252525; border-radius: 8px; padding: 16px; }
-.cr-compare-col.bad { border-color: rgba(192,57,43,.25); }
-.cr-compare-col.good { background: #1A2F25; border-color: rgba(126,200,160,.2); }
-.cr-clabel { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
-.cr-compare-col.bad .cr-clabel { color: rgba(192,57,43,.8); }
-.cr-compare-col.good .cr-clabel { color: rgba(126,200,160,.7); }
-.cr-cval { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
-.cr-compare-col.bad .cr-cval { color: #E06060; }
-.cr-compare-col.good .cr-cval { color: #7EC8A0; }
-.cr-cdesc { font-size: 11px; color: rgba(242,235,229,.45); line-height: 1.4; }
-.cr-vs { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #D36B42; border: 2px solid rgba(211,107,66,.3); border-radius: 6px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin: 0 auto; }
-.cr-close { grid-column: 1 / -1; background: #1A2F25; border: 1px solid rgba(126,200,160,.2); border-radius: 12px; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-.cr-close-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .12em; color: rgba(126,200,160,.7); text-transform: uppercase; margin-bottom: 4px; }
-.cr-close-headline { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: #F2EBE5; line-height: 1.3; }
-.cr-close-headline span { color: #D36B42; }
-.cr-close-sub { font-size: 12px; color: rgba(242,235,229,.5); margin-top: 4px; }
-.cr-cta-btn { background: #D36B42; color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: background .2s, transform .15s; text-decoration: none; display: inline-block; }
-.cr-cta-btn:hover { background: #E8956E; transform: translateY(-1px); }
-.cr-cta-btn:active { transform: translateY(0); }
-.cr-footnote { margin-top: 28px; text-align: center; font-size: 11px; color: rgba(242,235,229,.25); font-family: 'Space Mono', monospace; letter-spacing: .05em; line-height: 1.6; }
+const REIGNITE_STYLES = `
+.ri *,.ri *::before,.ri *::after{box-sizing:border-box;margin:0;padding:0;}
+.ri{--green:#1A2F25;--orange:#D36B42;--cream:#F2EBE5;--charcoal:#1A1C1A;--dark:#0A0A0A;--orange-light:#E8956E;background:var(--dark);color:var(--cream);font-family:Inter,sans-serif;overflow-x:hidden;min-height:100dvh;}
+.ri::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.ri-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(10,10,10,0.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(211,107,66,0.15);padding:0 56px;height:62px;display:flex;align-items:center;justify-content:space-between;}
+.ri .nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:var(--cream);letter-spacing:-0.5px;text-decoration:none;}
+.ri .nav-logo span{color:var(--orange);}
+.ri .nav-links{display:flex;gap:32px;align-items:center;}
+.ri .nav-links a{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;color:rgba(242,235,229,0.45);text-decoration:none;transition:color 0.2s;}
+.ri .nav-links a:hover{color:var(--cream);}
+.ri .nav-cta{background:var(--orange);color:#fff !important;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;padding:9px 22px;border-radius:6px;text-decoration:none;transition:background 0.2s;}
+.ri .nav-cta:hover{background:var(--orange-light) !important;}
+.ri-hero{min-height:100vh;display:flex;align-items:center;padding:120px 80px 100px;position:relative;overflow:hidden;}
+.ri .hero-glow{position:absolute;top:-100px;right:-200px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(211,107,66,0.07) 0%,transparent 68%);pointer-events:none;}
+.ri .hero-glow2{position:absolute;bottom:-200px;left:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,47,37,0.5) 0%,transparent 70%);pointer-events:none;}
+.ri .hero-inner{max-width:1080px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:center;}
+.ri .hero-kicker{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--orange);display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+.ri .hero-kicker::before{content:'';width:28px;height:1px;background:var(--orange);}
+.ri .hero-h1{font-family:'Space Grotesk',sans-serif;font-size:62px;font-weight:700;line-height:1.02;letter-spacing:-2px;color:var(--cream);margin-bottom:20px;}
+.ri .hero-h1 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--orange);font-weight:400;font-size:70px;}
+.ri .hero-sub{font-family:Inter,sans-serif;font-size:17px;line-height:1.7;color:rgba(242,235,229,0.55);max-width:500px;margin-bottom:40px;}
+.ri .hero-sub strong{color:var(--cream);}
+.ri .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+.ri .btn-primary{background:var(--orange);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.ri .btn-primary:hover{background:var(--orange-light);transform:translateY(-1px);}
+.ri .btn-ghost{background:transparent;color:rgba(242,235,229,0.6);font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:15px;padding:14px 24px;border-radius:8px;text-decoration:none;cursor:pointer;transition:color 0.2s;display:inline-flex;align-items:center;gap:6px;}
+.ri .btn-ghost:hover{color:var(--cream);}
+.ri .hero-trust{display:flex;gap:20px;flex-wrap:wrap;}
+.ri .trust-item{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;color:rgba(242,235,229,0.28);display:flex;align-items:center;gap:6px;}
+.ri .trust-dot{width:3px;height:3px;border-radius:50%;background:var(--orange);opacity:0.5;}
+.ri .hero-card{background:rgba(26,47,37,0.45);border:1px solid rgba(211,107,66,0.2);border-radius:20px;padding:32px;backdrop-filter:blur(10px);}
+.ri .hero-card-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.18em;color:rgba(211,107,66,0.7);margin-bottom:24px;}
+.ri .stat-row{display:flex;flex-direction:column;gap:12px;}
+.ri .stat-item{display:flex;align-items:center;gap:16px;padding:14px 16px;background:rgba(242,235,229,0.04);border-radius:10px;border:1px solid rgba(242,235,229,0.05);}
+.ri .stat-num{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:var(--orange);flex-shrink:0;min-width:68px;}
+.ri .stat-desc{font-family:Inter,sans-serif;font-size:12px;line-height:1.5;color:rgba(242,235,229,0.55);}
+.ri .stat-desc strong{color:var(--cream);display:block;font-size:13px;}
+.ri .hero-divider{height:1px;background:rgba(242,235,229,0.06);margin:20px 0;}
+.ri .hero-afford{text-align:center;font-family:Inter,sans-serif;font-size:13px;color:rgba(242,235,229,0.45);line-height:1.6;}
+.ri .hero-afford strong{color:var(--orange);font-family:'Space Mono',monospace;font-size:12px;display:block;margin-bottom:4px;}
+.ri .stats-bar{background:var(--green);border-top:1px solid rgba(211,107,66,0.15);border-bottom:1px solid rgba(211,107,66,0.15);padding:44px 80px;}
+.ri .stats-bar-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.ri .stat-col{text-align:center;padding:0 20px;border-right:1px solid rgba(242,235,229,0.07);}
+.ri .stat-col:last-child{border-right:none;}
+.ri .stat-big{font-family:'Space Mono',monospace;font-size:44px;font-weight:700;color:var(--orange);line-height:1;}
+.ri .stat-label{font-family:Inter,sans-serif;font-size:12px;color:rgba(242,235,229,0.55);margin-top:8px;line-height:1.5;}
+.ri .stat-source{font-family:'Space Mono',monospace;font-size:8px;color:rgba(242,235,229,0.2);letter-spacing:0.08em;margin-top:6px;}
+.ri-section{padding:96px 80px;}
+.ri .section-inner{max-width:1080px;margin:0 auto;}
+.ri .section-kicker{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--orange);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.ri .section-kicker::before{content:'';width:20px;height:1px;background:var(--orange);}
+.ri .section-h2{font-family:'Space Grotesk',sans-serif;font-size:42px;font-weight:700;line-height:1.1;letter-spacing:-1.2px;color:var(--cream);margin-bottom:14px;}
+.ri .section-h2 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--orange);font-weight:400;}
+.ri .section-sub{font-family:Inter,sans-serif;font-size:16px;line-height:1.65;color:rgba(242,235,229,0.5);max-width:580px;margin-bottom:52px;}
+.ri .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.ri .how-card{background:rgba(242,235,229,0.025);border:1px solid rgba(242,235,229,0.07);border-radius:16px;padding:30px;transition:border-color 0.2s;position:relative;overflow:hidden;}
+.ri .how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);}
+.ri .how-card:hover{border-color:rgba(211,107,66,0.25);}
+.ri .how-num{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--orange);margin-bottom:16px;}
+.ri .how-title{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;color:var(--cream);margin-bottom:10px;line-height:1.3;}
+.ri .how-desc{font-family:Inter,sans-serif;font-size:13.5px;line-height:1.65;color:rgba(242,235,229,0.55);}
+.ri .how-badge{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-family:'Space Mono',monospace;font-size:9px;background:rgba(211,107,66,0.1);color:var(--orange);border:1px solid rgba(211,107,66,0.2);padding:5px 11px;border-radius:20px;letter-spacing:0.06em;}
+.ri .calc-section{background:var(--green);padding:96px 80px;}
+.ri .calc-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ri .calc-left h2{font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:700;color:var(--cream);line-height:1.1;letter-spacing:-1px;margin-bottom:14px;}
+.ri .calc-left h2 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--orange);font-weight:400;}
+.ri .calc-left p{font-family:Inter,sans-serif;font-size:15px;line-height:1.65;color:rgba(242,235,229,0.55);margin-bottom:0;}
+.ri .calc-rate-badge{display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:rgba(211,107,66,0.15);border:1px solid rgba(211,107,66,0.25);border-radius:8px;padding:10px 16px;}
+.ri .calc-rate-badge span{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--orange);}
+.ri .calc-rate-badge p{font-family:Inter,sans-serif;font-size:12px;color:rgba(242,235,229,0.6);margin:0;line-height:1.4;}
+.ri .calc-box{background:rgba(10,10,10,0.5);border:1px solid rgba(211,107,66,0.2);border-radius:20px;padding:36px;}
+.ri .calc-box-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.16em;color:rgba(211,107,66,0.6);margin-bottom:24px;}
+.ri .calc-field{margin-bottom:20px;}
+.ri .calc-field label{font-family:Inter,sans-serif;font-size:13px;font-weight:500;color:rgba(242,235,229,0.7);display:block;margin-bottom:8px;}
+.ri .calc-input{width:100%;background:rgba(242,235,229,0.05);border:1px solid rgba(242,235,229,0.12);border-radius:8px;padding:12px 16px;font-family:'Space Mono',monospace;font-size:18px;color:var(--cream);outline:none;transition:border-color 0.2s;}
+.ri .calc-input:focus{border-color:var(--orange);}
+.ri .calc-input::placeholder{color:rgba(242,235,229,0.2);font-size:15px;}
+.ri .calc-divider{height:1px;background:rgba(242,235,229,0.07);margin:24px 0;}
+.ri .calc-result-primary{background:rgba(211,107,66,0.12);border:1px solid rgba(211,107,66,0.25);border-radius:12px;padding:24px;margin-bottom:16px;}
+.ri .calc-result-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--orange);margin-bottom:8px;}
+.ri .calc-result-num{font-family:'Space Mono',monospace;font-size:44px;font-weight:700;color:var(--orange);line-height:1;}
+.ri .calc-result-sub{font-family:Inter,sans-serif;font-size:12px;color:rgba(242,235,229,0.45);margin-top:6px;line-height:1.5;}
+.ri .calc-result-logic{font-family:'Space Mono',monospace;font-size:9px;color:rgba(242,235,229,0.22);margin-top:8px;letter-spacing:0.06em;}
+.ri .calc-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.ri .calc-mini{background:rgba(242,235,229,0.04);border:1px solid rgba(242,235,229,0.07);border-radius:10px;padding:14px 16px;text-align:center;}
+.ri .calc-mini-num{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--cream);}
+.ri .calc-mini-label{font-family:Inter,sans-serif;font-size:11px;color:rgba(242,235,229,0.4);margin-top:4px;line-height:1.4;}
+.ri .calc-cta-box{background:var(--green);border-radius:12px;padding:20px;text-align:center;border:1px solid rgba(126,200,160,0.15);}
+.ri .calc-cta-text{font-family:Inter,sans-serif;font-size:13px;color:rgba(242,235,229,0.6);margin-bottom:12px;line-height:1.5;}
+.ri .calc-cta-text strong{color:var(--cream);}
+.ri .btn-calc-cta{display:block;background:var(--orange);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;}
+.ri .btn-calc-cta:hover{background:var(--orange-light);}
+.ri .calc-placeholder{text-align:center;padding:32px 0;}
+.ri .calc-placeholder-icon{font-size:36px;margin-bottom:12px;opacity:0.3;}
+.ri .calc-placeholder-text{font-family:Inter,sans-serif;font-size:13px;color:rgba(242,235,229,0.3);line-height:1.6;}
+.ri .proof-section{background:rgba(242,235,229,0.015);}
+.ri .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;}
+.ri .proof-card{background:var(--dark);border:1px solid rgba(242,235,229,0.07);border-radius:16px;padding:28px;}
+.ri .proof-stars{color:var(--orange);font-size:14px;letter-spacing:3px;margin-bottom:16px;}
+.ri .proof-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.6;color:var(--cream);margin-bottom:20px;}
+.ri .proof-attr{display:flex;align-items:center;gap:12px;}
+.ri .proof-avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:1.5px solid rgba(211,107,66,0.3);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;color:var(--orange);}
+.ri .proof-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;color:var(--cream);}
+.ri .proof-loc{font-family:'Space Mono',monospace;font-size:9px;color:rgba(242,235,229,0.3);margin-top:2px;letter-spacing:0.06em;}
+.ri .proof-result{margin-top:14px;background:rgba(211,107,66,0.08);border:1px solid rgba(211,107,66,0.15);border-radius:7px;padding:8px 12px;font-family:'Space Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:0.1em;}
+.ri .upsell-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px;}
+.ri .upsell-card{border-radius:14px;padding:24px 28px;border:1px solid rgba(242,235,229,0.07);background:rgba(242,235,229,0.02);display:flex;gap:18px;align-items:flex-start;transition:all 0.2s;}
+.ri .upsell-card:hover{border-color:rgba(211,107,66,0.2);}
+.ri .upsell-icon{width:40px;height:40px;border-radius:9px;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ri .upsell-icon svg{width:18px;height:18px;}
+.ri .upsell-trigger{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.1em;color:var(--orange);margin-bottom:6px;display:block;}
+.ri .upsell-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:var(--cream);margin-bottom:6px;}
+.ri .upsell-desc{font-family:Inter,sans-serif;font-size:12.5px;line-height:1.6;color:rgba(242,235,229,0.5);}
+.ri .ownership-section{background:var(--green);}
+.ri .ownership-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.ri .own-item{padding:20px 0;}
+.ri .own-icon{margin-bottom:16px;}
+.ri .own-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:var(--cream);margin-bottom:8px;}
+.ri .own-desc{font-family:Inter,sans-serif;font-size:13px;line-height:1.6;color:rgba(242,235,229,0.5);}
+.ri .final-cta{padding:120px 80px;text-align:center;position:relative;overflow:hidden;}
+.ri .final-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(211,107,66,0.06) 0%,transparent 70%);pointer-events:none;}
+.ri .final-cta h2{font-family:'Space Grotesk',sans-serif;font-size:50px;font-weight:700;color:var(--cream);line-height:1.05;letter-spacing:-1.5px;margin-bottom:16px;}
+.ri .final-cta h2 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--orange);font-weight:400;font-size:56px;}
+.ri .final-cta p{font-family:Inter,sans-serif;font-size:16px;color:rgba(242,235,229,0.45);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.65;}
+.ri .final-affordability{font-family:'Space Mono',monospace;font-size:10px;color:rgba(242,235,229,0.2);letter-spacing:0.1em;margin-top:20px;}
+.ri-footer{background:rgba(242,235,229,0.02);border-top:1px solid rgba(242,235,229,0.05);padding:28px 80px;display:flex;align-items:center;justify-content:space-between;}
+.ri .footer-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:rgba(242,235,229,0.3);}
+.ri .footer-logo span{color:var(--orange);}
+.ri .footer-copy{font-family:'Space Mono',monospace;font-size:9px;color:rgba(242,235,229,0.18);letter-spacing:0.08em;}
+@media(max-width:860px){
+  .ri .hero-inner,.ri .calc-inner{grid-template-columns:1fr;}
+  .ri .hero-h1{font-size:40px;}
+  .ri .how-grid,.ri .proof-grid,.ri .upsell-grid,.ri .ownership-grid{grid-template-columns:1fr;}
+  .ri-section,.ri .calc-section,.ri .final-cta{padding:64px 28px;}
+  .ri-nav{padding:0 24px;}
+  .ri .stats-bar{padding:36px 28px;}
+  .ri .stats-bar-inner{grid-template-columns:1fr 1fr;gap:28px;}
+  .ri .stat-col{border-right:none;}
+  .ri-footer{padding:28px 24px;flex-direction:column;gap:16px;}
+}
 `;
 
 const CalculatorPage = () => {
-    useEffect(() => { window.scrollTo(0, 0); }, []);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = "NovaReach — Re-Ignite Your HVAC Pipeline";
+    }, []);
 
-    const [jobValue, setJobValue] = useState(850);
-    const [listSize, setListSize] = useState(180);
-    const [dormantMonths, setDormantMonths] = useState(12);
-    const [reactRate, setReactRate] = useState(10);
-    const [upsellRate, setUpsellRate] = useState(20);
+    const [listSize, setListSize] = useState('');
+    const [jobValue, setJobValue] = useState('');
 
-    const baseJobs = Math.round(listSize * (reactRate / 100));
-    const upsellJobs = Math.round(baseJobs * (upsellRate / 100));
-    const totalJobs = baseJobs + upsellJobs;
-    const totalRevenue = Math.round(totalJobs * jobValue);
-    const monthlyCost = 297;
-    const roi = totalRevenue > 0 ? totalRevenue / monthlyCost : 0;
-    const payback = totalRevenue > 0 ? Math.round((monthlyCost / totalRevenue) * 30) : 0;
-    const dormantYears = dormantMonths / 12;
-    const annualOppy = Math.round(listSize * (reactRate / 100) * jobValue * (1 + upsellRate / 100));
-    const leftOnTable = Math.round(annualOppy * dormantYears);
-    const barWidth = Math.min(100, Math.round((totalRevenue / (monthlyCost * 10)) * 100));
+    const RESPONSE_RATE = 0.08;
+    const SEASONS_PER_YEAR = 2;
 
-    const fmtFull = (n) => '$' + Math.round(n).toLocaleString();
+    const list = parseFloat(listSize) || 0;
+    const job  = parseFloat(jobValue) || 0;
+    const hasData = list > 0 && job > 0;
 
-    let verdict;
-    if (totalRevenue < 500) {
-        verdict = `Smaller list — but even ${baseJobs} rebooked jobs at ${fmtFull(jobValue)} each puts you at ${fmtFull(totalRevenue)} in 30 days. That's <span>${roi.toFixed(1)}x your monthly investment.</span>`;
-    } else if (roi >= 10) {
-        verdict = `<span>${fmtFull(totalRevenue)} recovered in one blast</span> — that's ${roi.toFixed(0)}x your monthly cost. The only question left is delivery.`;
-    } else if (roi >= 3) {
-        verdict = `${fmtFull(totalRevenue)} from a list that's been dormant for ${dormantMonths} months. <span>${roi.toFixed(1)}x ROI</span> before reviews or AI booking even kick in.`;
-    } else {
-        verdict = `Even at conservative rates, you're looking at <span>${fmtFull(totalRevenue)}</span> from contacts you already own. No ad spend required.`;
-    }
+    const responses = Math.round(list * RESPONSE_RATE);
+    const jobs      = responses;
+    const revenue   = jobs * job;
+    const annual    = revenue * SEASONS_PER_YEAR;
 
-    const closeHeadline = totalRevenue > 0
-        ? `At <span>${fmtFull(totalRevenue)}</span> recoverable, the math decides — not the pitch.`
-        : 'The math makes the decision — not the pitch.';
-
-    const closeSub = totalRevenue > 0
-        ? `The ${fmtFull(monthlyCost)}/mo investment pays for itself ${roi.toFixed(1)}x over from this blast alone.`
-        : "Once you see the number, the only question is: do you believe we can deliver it?";
-
-    const paybackDisplay = payback > 0 && payback <= 7 ? '< 1 week' : payback > 0 ? `${payback} days` : '—';
+    const fmt = v => v.toLocaleString('en-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
     return (
-        <div style={{ background: '#0A0A0A', minHeight: '100dvh' }} className="selection:bg-accent selection:text-white">
-            <style>{CALC_STYLES}</style>
-            <Navbar />
-            <div className="cr-wrap">
-                <div className="cr-header">
-                    <div className="cr-badge">NovaReach — Re-Ignite System</div>
-                    <h1 className="cr-title">How much revenue is<br /><span>sitting in your list?</span></h1>
-                    <p className="cr-sub">Enter your average job value and existing customer count below. We'll calculate exactly how much you're leaving on the table — and what the Re-Ignite System returns.</p>
+        <div className="ri">
+            <style>{REIGNITE_STYLES}</style>
+
+            {/* NAV */}
+            <nav className="ri-nav">
+                <a href="#" className="nav-logo">Nova<span>Reach</span></a>
+                <div className="nav-links">
+                    <a href="#how">How It Works</a>
+                    <a href="#calculator">Calculator</a>
+                    <a href="https://getnovareach.com/#booking" target="_blank" rel="noreferrer" className="nav-cta">Book a Call →</a>
                 </div>
+            </nav>
 
-                <div className="cr-grid">
-                    {/* Input Card */}
-                    <div className="cr-card">
-                        <div className="cr-card-title">Your Numbers <span className="cr-step-badge">STEP 01</span></div>
-
-                        <div className="cr-field">
-                            <label>Average Job Value (CAD)</label>
-                            <div className="cr-input-wrap">
-                                <span className="cr-prefix">$</span>
-                                <input type="number" className="cr-num-input has-prefix" value={jobValue} min={100} max={20000} step={50}
-                                    onChange={e => setJobValue(parseFloat(e.target.value) || 0)} />
-                            </div>
-                            <div className="cr-hint">Typical HVAC service call, tune-up, or repair booking average</div>
+            {/* HERO */}
+            <section className="ri-hero">
+                <div className="hero-glow" />
+                <div className="hero-glow2" />
+                <div className="hero-inner">
+                    <div>
+                        <div className="hero-kicker">HVAC CONTRACTORS — EASTERN CANADA</div>
+                        <h1 className="hero-h1">Your past customers<br />are sitting on<br /><em>jobs you haven't billed.</em></h1>
+                        <p className="hero-sub">We automate a <strong>seasonal re-engagement blast</strong> to your existing customer list — fully done-for-you. Most contractors see <strong>5–10 booked jobs</strong> in the first 30 days. Zero ad spend. Nothing extra on your end.</p>
+                        <div className="hero-actions">
+                            <a href="#calculator" className="btn-primary">Calculate My Revenue Gap →</a>
+                            <a href="#how" className="btn-ghost">See How It Works ↓</a>
                         </div>
-
-                        <div className="cr-field">
-                            <label>Number of Past Customers in Your List</label>
-                            <div className="cr-input-wrap">
-                                <input type="number" className="cr-num-input" value={listSize} min={10} max={5000} step={10}
-                                    onChange={e => setListSize(parseInt(e.target.value) || 0)} />
-                            </div>
-                            <div className="cr-hint">Contacts in your phone, old invoices, or CRM — even if unorganized</div>
-                        </div>
-
-                        <div className="cr-divider" />
-
-                        <div className="cr-field">
-                            <label>How many months since last contact?</label>
-                            <input type="range" className="cr-range" min={3} max={36} value={dormantMonths} step={3}
-                                onChange={e => setDormantMonths(parseInt(e.target.value))} />
-                            <div className="cr-range-val">{dormantMonths} months</div>
-                            <div className="cr-range-labels"><span>3 mo</span><span>36 mo</span></div>
-                        </div>
-
-                        <div className="cr-field">
-                            <label>Reactivation Rate (industry avg: 8–15%)</label>
-                            <input type="range" className="cr-range" min={5} max={25} value={reactRate} step={1}
-                                onChange={e => setReactRate(parseInt(e.target.value))} />
-                            <div className="cr-range-val">{reactRate}%</div>
-                            <div className="cr-range-labels"><span>5%</span><span>25%</span></div>
-                        </div>
-
-                        <div className="cr-field">
-                            <label>Upsell / Repeat Job Rate</label>
-                            <input type="range" className="cr-range" min={0} max={50} value={upsellRate} step={5}
-                                onChange={e => setUpsellRate(parseInt(e.target.value))} />
-                            <div className="cr-range-val">{upsellRate}%</div>
-                            <div className="cr-range-labels"><span>0%</span><span>50%</span></div>
+                        <div className="hero-trust">
+                            <span className="trust-item"><span className="trust-dot" />HVAC CONTRACTORS ONLY</span>
+                            <span className="trust-item"><span className="trust-dot" />FULLY DONE-FOR-YOU</span>
+                            <span className="trust-item"><span className="trust-dot" />NO AD SPEND</span>
+                            <span className="trust-item"><span className="trust-dot" />CASL COMPLIANT</span>
+                            <span className="trust-item"><span className="trust-dot" />LESS THAN ONE SERVICE CALL/MO</span>
                         </div>
                     </div>
-
-                    {/* Results Card */}
-                    <div className="cr-results">
-                        <div className="cr-results-title">Your Revenue Opportunity</div>
-                        <div className="cr-big-num">
-                            <div className="cr-blabel">Recoverable Revenue (1 Blast)</div>
-                            <div className="cr-bvalue">{fmtFull(totalRevenue)}</div>
-                            <div className="cr-bsub">From reactivation alone — before reviews, AI booking, or inbound</div>
+                    <div className="hero-card">
+                        <div className="hero-card-label">RE-IGNITE SYSTEM — WHAT TO EXPECT</div>
+                        <div className="stat-row">
+                            <div className="stat-item"><div className="stat-num">5–10</div><div className="stat-desc"><strong>Booked Jobs</strong>first 30 days from your existing list</div></div>
+                            <div className="stat-item"><div className="stat-num">10–20</div><div className="stat-desc"><strong>New Google Reviews</strong>auto-collected after every job</div></div>
+                            <div className="stat-item"><div className="stat-num">&lt;60s</div><div className="stat-desc"><strong>AI Response Time</strong>answers inbound while you're on the job</div></div>
                         </div>
-                        <div className="cr-res-divider" />
-                        <div className="cr-stat-row">
-                            <div className="cr-stat-box"><div className="cr-slabel">Jobs Booked</div><div className="cr-sval">{baseJobs}</div></div>
-                            <div className="cr-stat-box"><div className="cr-slabel">With Upsell</div><div className="cr-sval">{totalJobs}</div></div>
-                            <div className="cr-stat-box"><div className="cr-slabel">Monthly ROI</div><div className="cr-sval">{roi.toFixed(1)}x</div></div>
-                            <div className="cr-stat-box"><div className="cr-slabel">Payback Period</div><div className="cr-sval">{paybackDisplay}</div></div>
+                        <div className="hero-divider" />
+                        <div className="hero-afford">
+                            <strong>COSTS LESS THAN ONE SERVICE CALL PER MONTH</strong>
+                            Fully done-for-you. Setup fee waived. Cancel anytime.
                         </div>
-                        <div className="cr-verdict">
-                            <div className="cr-vlabel">The Math</div>
-                            <div className="cr-vtext" dangerouslySetInnerHTML={{ __html: verdict }} />
-                        </div>
-                    </div>
-
-                    {/* ROI Card */}
-                    <div className="cr-roi-card">
-                        <div className="cr-roi-title">What Does $297/mo Actually Buy?</div>
-                        <div className="cr-bar-wrap">
-                            <div className="cr-bar-label-row"><span>Your Monthly Investment</span><strong>$297 / month</strong></div>
-                            <div className="cr-bar-track"><div className="cr-bar-fill" style={{ width: '100%' }} /></div>
-                        </div>
-                        <div className="cr-bar-wrap">
-                            <div className="cr-bar-label-row"><span>Revenue from 1 Reactivation Blast</span><strong>{fmtFull(totalRevenue)}</strong></div>
-                            <div className="cr-bar-track"><div className="cr-bar-fill green" style={{ width: `${barWidth}%` }} /></div>
-                        </div>
-                        <div className="cr-compare">
-                            <div className="cr-compare-col bad">
-                                <div className="cr-clabel">Without Re-Ignite</div>
-                                <div className="cr-cval">{fmtFull(leftOnTable)}</div>
-                                <div className="cr-cdesc">Left unreachable in your contacts for another year</div>
-                            </div>
-                            <div className="cr-vs">VS</div>
-                            <div className="cr-compare-col good">
-                                <div className="cr-clabel">With Re-Ignite</div>
-                                <div className="cr-cval">{fmtFull(totalRevenue)}</div>
-                                <div className="cr-cdesc">Recovered in 30 days — then reviews and AI booking layer on top</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Close Line */}
-                    <div className="cr-close">
-                        <div>
-                            <div className="cr-close-label">The Only Objection Left</div>
-                            <div className="cr-close-headline" dangerouslySetInnerHTML={{ __html: closeHeadline }} />
-                            <div className="cr-close-sub">{closeSub}</div>
-                        </div>
-                        <a href="#booking" className="cr-cta-btn">
-                            Get Started — $297/mo →
-                        </a>
                     </div>
                 </div>
+            </section>
 
-                <div className="cr-footnote">
-                    Reactivation revenue estimates are based on industry-average response rates (8–15%) for SMS reactivation campaigns.<br />
-                    Individual results vary based on list quality, recency, and offer. Past customers who received service within 24 months convert at 2–3× the average rate.
+            {/* STATS BAR */}
+            <div className="stats-bar">
+                <div className="stats-bar-inner">
+                    <div className="stat-col"><div className="stat-big">80%</div><div className="stat-label">of homeowners start their contractor search online</div><div className="stat-source">INDUSTRY REALITY 2026</div></div>
+                    <div className="stat-col"><div className="stat-big">78%</div><div className="stat-label">hire the first company to respond — not the best one</div><div className="stat-source">LEAD RESPONSE MGMT. STUDY</div></div>
+                    <div className="stat-col"><div className="stat-big">5 Min</div><div className="stat-label">after that window odds of closing drop 10× instantly</div><div className="stat-source">HARVARD BUSINESS REVIEW</div></div>
+                    <div className="stat-col"><div className="stat-big">$0</div><div className="stat-label">cost per lead from your existing list vs. $60–140 on LSA</div><div className="stat-source">VS. GOOGLE LSA / ANGISTARS</div></div>
                 </div>
             </div>
-            <Footer />
+
+            {/* HOW IT WORKS */}
+            <section id="how" className="ri-section">
+                <div className="section-inner">
+                    <div className="section-kicker">HOW IT WORKS</div>
+                    <h2 className="section-h2">Three steps.<br /><em>Zero work on your end.</em></h2>
+                    <p className="section-sub">You share your past customer list once. We handle the messaging, timing, follow-up, and booking flow. Your job is to show up to the estimate.</p>
+                    <div className="how-grid">
+                        <div className="how-card"><div className="how-num">STEP 01</div><div className="how-title">You share your past customer list</div><div className="how-desc">Export contacts from any CRM, spreadsheet, or invoicing tool. We handle import, scrubbing, and segmentation. Upload once — we do the rest.</div><div className="how-badge">⏱ 10 MINUTES ON YOUR END</div></div>
+                        <div className="how-card"><div className="how-num">STEP 02</div><div className="how-title">We blast before peak season</div><div className="how-desc">AC tune-up reminders in spring. Furnace checks in fall. Every message timed to hit your list right before the rush — personalized, automated, CASL-compliant.</div><div className="how-badge">📲 AUTOMATED SMS + EMAIL</div></div>
+                        <div className="how-card"><div className="how-num">STEP 03</div><div className="how-title">Jobs booked. Reviewed. Re-blasted every season.</div><div className="how-desc">Responses flow into your pipeline automatically. Review requests go out after every job. Your list gets re-engaged each season without you lifting a finger.</div><div className="how-badge">🔁 RUNS EVERY SEASON</div></div>
+                    </div>
+                </div>
+            </section>
+
+            {/* CALCULATOR */}
+            <section id="calculator" className="calc-section">
+                <div className="calc-inner">
+                    <div className="calc-left">
+                        <div className="section-kicker" style={{ color: 'rgba(242,235,229,0.4)' }}>REVENUE AT RISK CALCULATOR</div>
+                        <h2>How much money is sitting<br /><em>in your old list?</em></h2>
+                        <p>Most HVAC contractors have 150–400 past customers they've stopped contacting. Enter your numbers — see what a single seasonal campaign could realistically generate.</p>
+                        <div className="calc-rate-badge"><span>8%</span><p>Industry average response rate<br />for warm past-customer campaigns</p></div>
+                    </div>
+                    <div className="calc-box">
+                        <div className="calc-box-label">ENTER YOUR NUMBERS — RESULTS APPEAR INSTANTLY</div>
+                        <div className="calc-field">
+                            <label>How many past customers are on your list?</label>
+                            <input className="calc-input" type="number" placeholder="e.g. 250" value={listSize} onChange={e => setListSize(e.target.value)} min="0" />
+                        </div>
+                        <div className="calc-field">
+                            <label>Your average job value ($CAD)?</label>
+                            <input className="calc-input" type="number" placeholder="e.g. 450" value={jobValue} onChange={e => setJobValue(e.target.value)} min="0" />
+                        </div>
+                        <div className="calc-divider" />
+
+                        {!hasData && (
+                            <div className="calc-placeholder">
+                                <div className="calc-placeholder-icon">↑</div>
+                                <div className="calc-placeholder-text">Enter your list size and average job value above<br />to see your estimated seasonal revenue.</div>
+                            </div>
+                        )}
+
+                        {hasData && (
+                            <div style={{ display: 'block' }}>
+                                <div className="calc-result-primary">
+                                    <div className="calc-result-label">ESTIMATED REVENUE — ONE SEASONAL CAMPAIGN</div>
+                                    <div className="calc-result-num">{fmt(revenue)}</div>
+                                    <div className="calc-result-sub">from {list.toLocaleString()} past customers at 8% response rate</div>
+                                    <div className="calc-result-logic">{list.toLocaleString()} contacts × 8% = {responses} responses × ${job.toLocaleString()} avg job = {fmt(revenue)}</div>
+                                </div>
+                                <div className="calc-breakdown">
+                                    <div className="calc-mini"><div className="calc-mini-num">{jobs}</div><div className="calc-mini-label">Estimated jobs<br />booked</div></div>
+                                    <div className="calc-mini"><div className="calc-mini-num">{responses}</div><div className="calc-mini-label">Contacts who<br />respond</div></div>
+                                </div>
+                                <div className="calc-cta-box">
+                                    <div className="calc-cta-text">This runs <strong>every spring and fall</strong> — automatically. That's <strong>{fmt(annual)}</strong> per year from customers you already earned.</div>
+                                    <a href="https://getnovareach.com/#booking" target="_blank" rel="noreferrer" className="btn-calc-cta">Book a Call — See If Your Market Is Available →</a>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
+
+            {/* PROOF / TESTIMONIALS */}
+            <section className="proof-section ri-section">
+                <div className="section-inner">
+                    <div className="section-kicker">FROM THE FIELD</div>
+                    <h2 className="section-h2">HVAC contractors who ran<br /><em>Re-Ignite this spring.</em></h2>
+                    <div className="proof-grid">
+                        <div className="proof-card">
+                            <div className="proof-stars">★★★★★</div>
+                            <div className="proof-quote">"Sent a blast to 190 contacts I hadn't touched in two years. Booked 8 tune-ups in the first week. Easiest jobs I've had all spring."</div>
+                            <div className="proof-attr"><div className="proof-avatar">MK</div><div><div className="proof-name">Mike K.</div><div className="proof-loc">HVAC CONTRACTOR — HAMILTON, ON</div></div></div>
+                            <div className="proof-result">8 JOBS BOOKED — 190-CONTACT LIST — WEEK 1</div>
+                        </div>
+                        <div className="proof-card">
+                            <div className="proof-stars">★★★★★</div>
+                            <div className="proof-quote">"I didn't even know I had that many past customers. They set it all up, I just started getting calls. First month paid for itself three times over."</div>
+                            <div className="proof-attr"><div className="proof-avatar">DL</div><div><div className="proof-name">Dave L.</div><div className="proof-loc">HVAC &amp; FURNACE — OTTAWA, ON</div></div></div>
+                            <div className="proof-result">12 JOBS — 30 DAYS — $0 AD SPEND</div>
+                        </div>
+                        <div className="proof-card">
+                            <div className="proof-stars">★★★★★</div>
+                            <div className="proof-quote">"My Google reviews went from 11 to 34 in six weeks. Now I'm ranking above guys who've been in business way longer than me."</div>
+                            <div className="proof-attr"><div className="proof-avatar">SR</div><div><div className="proof-name">Steve R.</div><div className="proof-loc">COOLING SYSTEMS — MISSISSAUGA, ON</div></div></div>
+                            <div className="proof-result">+23 GOOGLE REVIEWS — 6 WEEKS</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* UPSELL / FULL SYSTEM */}
+            <section className="ri-section">
+                <div className="section-inner">
+                    <div className="section-kicker">THE FULL SYSTEM</div>
+                    <h2 className="section-h2">Start with Re-Ignite.<br /><em>Add layers as you grow.</em></h2>
+                    <p className="section-sub">Everything below is already built inside the platform. You unlock what you need based on where your business is right now — nothing gets sold that doesn't apply to you.</p>
+                    <div className="upsell-grid">
+                        <div className="upsell-card">
+                            <div className="upsell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D36B42" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                            <div><span className="upsell-trigger">IF: "I NEVER ASK FOR REVIEWS" OR "I HAVE UNDER 30"</span><div className="upsell-title">Review Machine</div><div className="upsell-desc">Auto-collects 5-star reviews after every completed job. 10–20 new reviews per month. Zero effort. Your Google ranking compounds over time.</div></div>
+                        </div>
+                        <div className="upsell-card">
+                            <div className="upsell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D36B42" strokeWidth="2"><rect x="2" y="3" width="18" height="14" rx="4"/><path d="M6 21l3-4h6l3 4"/></svg></div>
+                            <div><span className="upsell-trigger">IF: "I MISS CALLS WHEN I'M ON A JOB"</span><div className="upsell-title">AI Booking Assistant</div><div className="upsell-desc">Responds to inbound leads in under 60 seconds, 24/7. Qualifies, books, and confirms estimates while you're working. 78% of homeowners hire the first to respond.</div></div>
+                        </div>
+                        <div className="upsell-card">
+                            <div className="upsell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D36B42" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                            <div><span className="upsell-trigger">IF: "I GET MESSAGES EVERYWHERE AND MISS THEM"</span><div className="upsell-title">Unified Lead Inbox</div><div className="upsell-desc">SMS, email, Google My Business, webchat — all in one place on your phone. Missed call text-back included. Every lead captured automatically.</div></div>
+                        </div>
+                        <div className="upsell-card">
+                            <div className="upsell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#D36B42" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                            <div><span className="upsell-trigger">IF: "MY WEBSITE IS OLD" OR "I DON'T GET LEADS FROM IT"</span><div className="upsell-title">AI Website</div><div className="upsell-desc">Built in a day. Books estimates automatically. 3.2× more lead capture vs. a standard contractor site. Every lead and review stays on your profile forever.</div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* OWNERSHIP */}
+            <section className="ownership-section ri-section">
+                <div className="section-inner">
+                    <div className="section-kicker" style={{ color: 'rgba(242,235,229,0.4)' }}>YOU OWN EVERYTHING</div>
+                    <h2 className="section-h2">Your website. Your list.<br /><em>Your reviews.</em></h2>
+                    <p className="section-sub">We're not a lead rental platform. Everything built for your business stays with your business — permanently.</p>
+                    <div className="ownership-grid">
+                        <div className="own-item">
+                            <div className="own-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D36B42" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                            <div className="own-title">Your Website Is Yours</div>
+                            <div className="own-desc">If you ever leave, you keep the site. No hostage domains, no ransom exports. Your digital property — always.</div>
+                        </div>
+                        <div className="own-item">
+                            <div className="own-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D36B42" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                            <div className="own-title">Every Review Stays on Google</div>
+                            <div className="own-desc">Reviews go directly to your Google Business Profile — not a walled platform. They stay forever regardless of your relationship with us.</div>
+                        </div>
+                        <div className="own-item">
+                            <div className="own-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D36B42" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+                            <div className="own-title">Your Customer List Is Yours</div>
+                            <div className="own-desc">We never own your contacts. Your list — enriched and segmented — is always exportable in full. No lock-in, no data ransom.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* FINAL CTA */}
+            <section className="final-cta">
+                <div className="final-glow" />
+                <h2>Stop leaving<br /><em>seasonal revenue</em><br />on the table.</h2>
+                <p>Your past customers are ready to book. They just haven't heard from you. That changes in 48 hours.</p>
+                <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <a href="https://getnovareach.com/#booking" target="_blank" rel="noreferrer" className="btn-primary" style={{ fontSize: '16px', padding: '16px 36px' }}>Book a Free Strategy Call →</a>
+                    <a href="#calculator" className="btn-ghost" style={{ fontSize: '16px', padding: '16px 24px' }}>Run the Calculator First ↑</a>
+                </div>
+                <p className="final-affordability">ONE CONTRACTOR PER AREA &nbsp;·&nbsp; LIMITED SPRING AVAILABILITY &nbsp;·&nbsp; COSTS LESS THAN ONE SERVICE CALL/MO</p>
+            </section>
+
+            {/* FOOTER */}
+            <footer className="ri-footer">
+                <div className="footer-logo">Nova<span>Reach</span></div>
+                <div className="footer-copy">© 2026 NOVAREACH — HVAC GROWTH SYSTEM — EASTERN CANADA</div>
+            </footer>
         </div>
     );
 };
