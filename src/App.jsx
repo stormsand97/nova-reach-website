@@ -1554,6 +1554,10 @@ const REIGNITE_STYLES = `
   .ri .stat-col{border-right:none;}
   .ri-footer{padding:28px 24px;flex-direction:column;gap:16px;}
 }
+@keyframes ri-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ri .ri-logo-spin{animation:ri-spin 20s linear infinite;}
+.ri .nav-logo-wrap{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.ri .footer-logo-wrap{display:flex;align-items:center;gap:8px;}
 `;
 
 const CalculatorPage = () => {
@@ -1585,7 +1589,13 @@ const CalculatorPage = () => {
 
             {/* NAV */}
             <nav className="ri-nav">
-                <a href="#" className="nav-logo">Nova<span>Reach</span></a>
+                <a href="#" className="nav-logo-wrap">
+                    <svg viewBox="0 0 100 100" className="ri-logo-spin" style={{ width: '24px', height: '24px' }} fill="#D36B42">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M50 72C62.1503 72 72 62.1503 72 50C72 37.8497 62.1503 28 50 28C37.8497 28 28 37.8497 28 50C28 62.1503 37.8497 72 50 72ZM50 63C57.1797 63 63 57.1797 63 50C63 42.8203 57.1797 37 50 37C42.8203 37 37 42.8203 37 50C37 57.1797 42.8203 63 50 63Z" />
+                        {[...Array(24)].map((_, i) => (<rect key={i} x="48.5" y="2" width="3" height="22" transform={`rotate(${i * 15} 50 50)`} />))}
+                    </svg>
+                    <span className="nav-logo">Nova<span>Reach</span></span>
+                </a>
                 <div className="nav-links">
                     <a href="#how">How It Works</a>
                     <a href="#calculator">Calculator</a>
@@ -1799,7 +1809,13 @@ const CalculatorPage = () => {
 
             {/* FOOTER */}
             <footer className="ri-footer">
-                <div className="footer-logo">Nova<span>Reach</span></div>
+                <div className="footer-logo-wrap">
+                    <svg viewBox="0 0 100 100" className="ri-logo-spin" style={{ width: '20px', height: '20px' }} fill="#D36B42">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M50 72C62.1503 72 72 62.1503 72 50C72 37.8497 62.1503 28 50 28C37.8497 28 28 37.8497 28 50C28 62.1503 37.8497 72 50 72ZM50 63C57.1797 63 63 57.1797 63 50C63 42.8203 57.1797 37 50 37C42.8203 37 37 42.8203 37 50C37 57.1797 42.8203 63 50 63Z" />
+                        {[...Array(24)].map((_, i) => (<rect key={i} x="48.5" y="2" width="3" height="22" transform={`rotate(${i * 15} 50 50)`} />))}
+                    </svg>
+                    <div className="footer-logo">Nova<span>Reach</span></div>
+                </div>
                 <div className="footer-copy">© 2026 NOVAREACH — HVAC GROWTH SYSTEM — EASTERN CANADA</div>
             </footer>
         </div>
