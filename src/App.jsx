@@ -9,6 +9,10 @@ import topomapImg from './assets/topographical-map.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const DEMO_CALL_BOOKING_ID = 'Aa3ERXG55COZyjjv9l6X';
+const DEMO_CALL_BOOKING_URL = `https://link.getnovareach.com/widget/booking/${DEMO_CALL_BOOKING_ID}`;
+const GHL_FORM_EMBED_SCRIPT = 'https://link.getnovareach.com/js/form_embed.js';
+
 // Utility for merging tailwind classes
 function cn(...inputs) {
     return twMerge(clsx(inputs));
@@ -1030,6 +1034,27 @@ const FAQ = () => {
 // ----------------------------------------------------------------------------
 // J. BOOKING SECTION
 // ----------------------------------------------------------------------------
+const GHLBookingEmbed = () => {
+    useEffect(() => {
+        if (document.querySelector(`script[src="${GHL_FORM_EMBED_SCRIPT}"]`)) return;
+
+        const script = document.createElement('script');
+        script.src = GHL_FORM_EMBED_SCRIPT;
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
+
+    return (
+        <iframe
+            src={DEMO_CALL_BOOKING_URL}
+            style={{ width: "100%", border: "none", overflow: "hidden", height: "1150px" }}
+            scrolling="no"
+            id="sIPS4hhHJWLsrQtNFeiD_1778021141029"
+            title="NovaReach Demo Call Booking Calendar"
+        />
+    );
+};
+
 const Booking = () => {
     return (
         <section id="booking" className="py-24 bg-background relative z-10 font-sans border-t border-primary/10">
@@ -1043,14 +1068,9 @@ const Booking = () => {
                     </p>
                 </div>
 
-                {/* Embedded GoHighLevel Calendar */}
+                {/* GoHighLevel Demo Call Calendar embed */}
                 <div className="w-full relative bg-transparent rounded-3xl overflow-hidden">
-                    <iframe
-                        src="https://link.getnovareach.com/widget/booking/qFRTVGZv9LgH5ic3teRC"
-                        style={{ width: "100%", border: "none", overflow: "hidden", height: "1150px" }}
-                        scrolling="no"
-                        id="qFRTVGZv9LgH5ic3teRC_1775851920443"
-                    />
+                    <GHLBookingEmbed />
                 </div>
             </div>
         </section>
