@@ -1631,7 +1631,7 @@ const CalculatorPage = () => {
                     <div>
                         <div className="hero-kicker">HVAC CONTRACTORS — EASTERN CANADA</div>
                         <h1 className="hero-h1">Your past customers<br />are sitting on<br /><em>jobs you haven't billed.</em></h1>
-                        <p className="hero-sub">We automate a <strong>seasonal re-engagement blast</strong> to your existing customer list — fully done-for-you. Most contractors see <strong>5–10 booked jobs</strong> in the first 30 days. Zero ad spend. Nothing extra on your end.</p>
+                        <p className="hero-sub">We automate a <strong>seasonal re-engagement blast</strong> to your existing customer list — fully done-for-you. Most contractors see <strong>2–5 booked jobs</strong> in the first 30 days. Zero ad spend. Nothing extra on your end.</p>
                         <div className="hero-actions">
                             <a href="#calculator" className="btn-primary">Calculate My Revenue Gap →</a>
                             <a href="#how" className="btn-ghost">See How It Works ↓</a>
@@ -1647,7 +1647,7 @@ const CalculatorPage = () => {
                     <div className="hero-card">
                         <div className="hero-card-label">RE-IGNITE SYSTEM — WHAT TO EXPECT</div>
                         <div className="stat-row">
-                            <div className="stat-item"><div className="stat-num">5–10</div><div className="stat-desc"><strong>Booked Jobs</strong>first 30 days from your existing list</div></div>
+                            <div className="stat-item"><div className="stat-num">2–5</div><div className="stat-desc"><strong>Booked Jobs</strong>first 30 days from your existing list</div></div>
                             <div className="stat-item"><div className="stat-num">10–20</div><div className="stat-desc"><strong>New Google Reviews</strong>auto-collected after every job</div></div>
                             <div className="stat-item"><div className="stat-num">&lt;60s</div><div className="stat-desc"><strong>AI Response Time</strong>answers inbound while you're on the job</div></div>
                         </div>
